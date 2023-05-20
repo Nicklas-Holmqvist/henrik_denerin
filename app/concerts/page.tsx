@@ -2,8 +2,8 @@ import React from 'react';
 
 interface ConcertsProps {}
 
-const Concerts: React.FC<ConcertsProps> = () => {
+const ConcertsPage: React.FC<ConcertsProps> = () => {
   return <div>Concerts</div>;
 };
 
-export default Concerts;
+export default ConcertsPage;
