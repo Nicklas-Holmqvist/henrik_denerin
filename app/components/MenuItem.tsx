@@ -28,11 +28,12 @@ const MenuItem: React.FC<MenuItemProps> = ({ menuItems }) => {
     return () => document.removeEventListener('click', handleOutsideClick);
   }, [subRef]);
 
-  console.log(subRef.current);
-  console.log(open);
   return (
     <div ref={subRef}>
-      <Link href={menuItems.path} onClick={() => setOpen(true)}>
+      <Link
+        href={menuItems.path}
+        onClick={() => setOpen(true)}
+        onMouseOver={() => setOpen(true)}>
         {menuItems.text}
       </Link>
       {open ? (
