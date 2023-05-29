@@ -1,5 +1,6 @@
+import Works from '@/app/components/Works';
 import Link from 'next/link';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 interface WorkCategoryProps {
   params: { type: string };
@@ -11,7 +12,9 @@ const WorkCategoryPage: React.FC<WorkCategoryProps> = ({
   return (
     <div>
       <h2>{type}</h2>
-      <Link href={`/works/${type}/158625138`}>Gå till stycke</Link>
+      <Suspense fallback={<div>Laddar</div>}>
+        <Works type={type} />
+      </Suspense>
     </div>
   );
 };

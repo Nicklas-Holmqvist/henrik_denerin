@@ -64,7 +64,6 @@ const WorkInfo: React.FC<WorkInfoProps> = async ({ id }) => {
   const concert: WorkInterface = await fetchConcert(id);
   return (
     <div>
-      WorkInfo
       {concert !== undefined ? <h3>{concert.workinfo.title}</h3> : null}
     </div>
   );
