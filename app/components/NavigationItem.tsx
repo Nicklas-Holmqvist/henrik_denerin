@@ -14,8 +14,8 @@ interface NavigationItemProps {
 const NavigationItem: React.FC<NavigationItemProps> = ({ menuItems }) => {
   return (
     <ul className="flex flex-column">
-      {menuItems.map((menuItem) => (
-        <li key={menuItem.text} className="px-2 relative">
+      {menuItems.map((menuItem, index) => (
+        <li key={index} className="px-2 relative">
           <MenuItem menuItems={menuItem} />
         </li>
       ))}

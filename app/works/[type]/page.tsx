@@ -9,13 +9,14 @@ interface WorkCategoryProps {
 const WorkCategoryPage: React.FC<WorkCategoryProps> = ({
   params: { type },
 }) => {
+  const formatString = type.replace('%20', ' ');
   return (
-    <div>
-      <h2>{type}</h2>
+    <section>
+      <h1 className="text-center">{formatString}</h1>
       <Suspense fallback={<div>Laddar</div>}>
-        <Works type={type} />
+        <Works type={formatString} />
       </Suspense>
-    </div>
+    </section>
   );
 };
 
