@@ -1,5 +1,7 @@
-import './globals.css';
 import { Archivo, Noto_Sans } from 'next/font/google';
+
+import DesktopHeader from '@/app/components/Header';
+import './globals.css';
 
 const archivo = Archivo({ subsets: ['latin'], variable: '--font-archivo' });
 const notoSans = Noto_Sans({
@@ -21,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${archivo.variable} ${notoSans.variable}`}>
+        <DesktopHeader />
         {children}
       </body>
     </html>
