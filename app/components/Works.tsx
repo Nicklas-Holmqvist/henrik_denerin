@@ -31,14 +31,12 @@ async function fetchTags() {
   const response = await request({
     query: query,
   });
-  const works = await response;
-  if (works !== null) return works;
+  if (response !== null) return response;
   else return null;
 }
 
 async function fetchWorks(tags: TagsInterface, type: string) {
-  const cleanType = type.replace('%20', ' ');
-  const category = tags.allTags.filter((tag) => tag.tagtitle === cleanType);
+  const category = tags.allTags.filter((tag) => tag.tagtitle === type);
 
   const query = `query Works {
         allWorkinfos(filter: {tags: {allIn: ${category[0].id}}}) {
@@ -55,9 +53,10 @@ async function fetchWorks(tags: TagsInterface, type: string) {
   const response = await request({
     query: query,
   });
-  const works = await response;
-  if (works !== null) return works;
-  else return null;
+  if (!response) {
+    throw new Error('Failed to fetch data');
+  }
+  return response;
 }
 
 interface WorksProps {
@@ -69,20 +68,18 @@ const Works: React.FC<WorksProps> = async ({ type }) => {
   const works: WorksInterface = await fetchWorks(tags, type);
 
   return (
-    <div>
+    <article>
       {works.allWorkinfos.map((work) => (
         <>
           <Link href={`/works/${type}/${work.id}`}>
-            <h2 key={work.id}>
-              {work.title}
-              <span>
-                {work.year} - {work.instrument}
-              </span>
-            </h2>
+            <h3 key={work.id} className="text-center py-1">
+              {work.title} [{work.year}]
+              <span className="font-normal"> &mdash; {work.instrument}</span>
+            </h3>
           </Link>
         </>
       ))}
-    </div>
+    </article>
   );
 };
 

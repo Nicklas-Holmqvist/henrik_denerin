@@ -39,8 +39,8 @@ const MenuItem: React.FC<MenuItemProps> = ({ menuItems }) => {
       {open ? (
         <ul className="flex-row absolute w-40">
           {menuItems.categories.length !== 0
-            ? menuItems.categories.map((category) => (
-                <li key={category.tagtitle} className="">
+            ? menuItems.categories.map((category, index) => (
+                <li key={index} className="">
                   <Link
                     href={`/works/${category.tagtitle}`}
                     onClick={() => setOpen(false)}>

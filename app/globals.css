@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --color-darkblue: #04194F;
+  --color-darkblue: #04194f;
   --color-blue: #072c89;
-  --color-white: #F4F4F9;
+  --color-white: #f4f4f9;
 }
 
 * {
@@ -19,12 +19,22 @@ body {
   background: var(--color-white);
 }
 
-h1{
-  font-family: var(--font-archivo);
-  font-size: 24px;
+section {
+  padding-top: 4rem;
 }
 
-p{
+h1 {
+  font-family: var(--font-archivo);
+  font-size: 32px;
+}
+
+h3 {
+  font-family: var(--font-archivo);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+p {
   font-family: var(--font-noto-sans);
   font-size: 14px;
 }
