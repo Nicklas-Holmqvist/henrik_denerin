@@ -1,5 +1,4 @@
 import Works from '@/app/components/Works';
-import Link from 'next/link';
 import React, { Suspense } from 'react';
 
 interface WorkCategoryProps {
