@@ -8,7 +8,6 @@ interface WorkInfoProps {
 const WorkInfoPage: React.FC<WorkInfoProps> = ({ params: { id } }) => {
   return (
     <div>
-      <h2>{id}</h2>
       <Suspense fallback={<div>Laddar...</div>}>
         <WorkInfo id={id} />
       </Suspense>
