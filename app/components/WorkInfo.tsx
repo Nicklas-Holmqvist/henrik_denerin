@@ -1,7 +1,9 @@
-import { request } from '@/lib/datocms';
 import Link from 'next/link';
 import React from 'react';
+import { request } from '@/lib/datocms';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+
+import MediaPlayer from './MediaPlayer';
 
 export interface WorkInterface {
   workinfo: {
@@ -40,9 +42,6 @@ async function fetchwork(id: number) {
         commision
         premiere
         programnote
-        testprogramnote {
-          value
-        }
         media
         excerpt {
           title
@@ -102,6 +101,7 @@ const WorkInfo: React.FC<WorkInfoProps> = async ({ id }) => {
           Babelscore
         </Link>
       </p>
+      {work.workinfo.media ? <MediaPlayer url={work.workinfo.media} /> : null}
       {work.workinfo.programnote ? (
         <ReactMarkdown className="max-w-4xl m-auto py-4">
           {work.workinfo.programnote}
