@@ -1,5 +1,6 @@
-import Works from '@/app/components/Works';
 import React, { Suspense } from 'react';
+
+import Works from '@/app/components/Works';
 
 interface WorkCategoryProps {
   params: { type: string };
