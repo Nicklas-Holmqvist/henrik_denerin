@@ -1,5 +1,6 @@
-import WorkInfo from '@/app/components/WorkInfo';
 import React, { Suspense } from 'react';
+
+import WorkInfo from '@/app/components/WorkInfo';
 
 interface WorkInfoProps {
   params: { id: number };

@@ -1,4 +1,4 @@
-import { request } from '../../../lib/datocms';
+import { datoRequest } from '../../../lib/datocms';
 import { NextResponse } from 'next/server';
 
 export interface Error {
@@ -29,7 +29,7 @@ export async function GET() {
   };
 
   try {
-    const response = await request({
+    const response = await datoRequest({
       query: query,
     });
     return NextResponse.json(response);

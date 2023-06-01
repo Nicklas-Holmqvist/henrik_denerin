@@ -1,6 +1,7 @@
-import { request } from '@/lib/datocms';
+'use client';
+
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export interface WorksInterface {
   allWorkinfos: {
@@ -14,71 +15,45 @@ export interface WorksInterface {
   }[];
 }
 
-export interface TagsInterface {
-  allTags: {
-    id: number;
-    tagtitle: string;
-  }[];
-}
-
-async function fetchTags() {
-  const query = `query Tags {
-        allTags {
-          id
-          tagtitle
-        }
-      }`;
-  const response = await request({
-    query: query,
-  });
-  if (response !== null) return response;
-  else return null;
-}
-
-async function fetchWorks(tags: TagsInterface, type: string) {
-  const category = tags.allTags.filter((tag) => tag.tagtitle === type);
-
-  const query = `query Works {
-        allWorkinfos(filter: {tags: {allIn: ${category[0].id}}}) {
-          title
-          year
-          instrument
-          id
-          tags {
-            tagtitle
-          }
-        }
-      }`;
-
-  const response = await request({
-    query: query,
-  });
-  if (!response) {
-    throw new Error('Failed to fetch data');
-  }
-  return response;
-}
-
 interface WorksProps {
   type: string;
 }
 
-const Works: React.FC<WorksProps> = async ({ type }) => {
-  const tags: TagsInterface = await fetchTags();
-  const works: WorksInterface = await fetchWorks(tags, type);
+const Works: React.FC<WorksProps> = ({ type }) => {
+  const [data, setData] = useState<WorksInterface | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchWorks = async () => {
+      const res = await fetch(`/api/works/category?type=${type}`);
+      const response = await res.json();
+      setData(response);
+      setLoading(false);
+    };
+    fetchWorks();
+  }, [type]);
 
   return (
     <article>
-      {works.allWorkinfos.map((work) => (
+      {loading ? (
+        true
+      ) : (
         <>
-          <Link href={`/works/${type}/${work.id}`}>
-            <h3 key={work.id} className="text-center py-1">
-              {work.title} [{work.year}]
-              <span className="font-normal"> &mdash; {work.instrument}</span>
-            </h3>
-          </Link>
+          {data!.allWorkinfos.map((work) => (
+            <>
+              <Link href={`/works/${type}/${work.id}`}>
+                <h3 key={work.id} className="text-center py-1">
+                  {work.title} [{work.year}]
+                  <span className="font-normal">
+                    {' '}
+                    &mdash; {work.instrument}
+                  </span>
+                </h3>
+              </Link>
+            </>
+          ))}
         </>
-      ))}
+      )}
     </article>
   );
 };
