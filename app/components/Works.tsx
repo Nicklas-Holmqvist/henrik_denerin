@@ -35,9 +35,7 @@ const Works: React.FC<WorksProps> = ({ type }) => {
 
   return (
     <article>
-      {loading ? (
-        true
-      ) : (
+      {loading ? null : (
         <>
           {data!.allWorkinfos.map((work) => (
             <>

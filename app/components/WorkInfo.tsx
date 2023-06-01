@@ -27,7 +27,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ id }: WorkInfoProps) => {
 
   return (
     <section>
-      {loading !== true ? (
+      {loading ? null : (
         <>
           <h1 key={data!.workinfo.id} className="text-center">
             {data!.workinfo.title} [{data!.workinfo.year}]
@@ -70,7 +70,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ id }: WorkInfoProps) => {
             </ReactMarkdown>
           ) : null}
         </>
-      ) : null}
+      )}
     </section>
   );
 };
