@@ -55,7 +55,10 @@ export async function GET(request: Request) {
 
   const tags: TagsInterface = await fetchTags();
 
-  const category = tags.allTags.filter((tag) => tag.tagtitle === type);
+  const category: {
+    id: number;
+    tagtitle: string;
+  }[] = tags.allTags.filter((tag) => tag.tagtitle === type);
 
   const query = `query Works {
         allWorkinfos(filter: {tags: {allIn: ${category[0].id}}}) {
