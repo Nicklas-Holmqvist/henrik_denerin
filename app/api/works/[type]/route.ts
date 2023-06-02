@@ -51,6 +51,8 @@ export async function GET(request: Request) {
     ],
   };
 
+  console.log(tagResponse);
+
   const category: Tag[] = tagResponse.allTags.filter(
     (tag) => tag.tagtitle === type
   );
