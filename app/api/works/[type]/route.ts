@@ -55,30 +55,57 @@ export async function GET(request: Request) {
 
   const tags: TagsInterface = await fetchTags();
 
-  const category = tags.allTags.filter((tag) => tag.tagtitle === type);
+  const errorResponse: TagsInterface = {
+    allTags: [
+      {
+        id: 156210071,
+        tagtitle: 'all',
+      },
+    ],
+  };
 
-  const query = `query Works {
-        allWorkinfos(filter: {tags: {allIn: ${category[0].id}}}) {
-          title
-          year
-          instrument
-          id
-          tags {
-            tagtitle
-          }
-        }
-      }`;
+  const category: {
+    id: number;
+    tagtitle: string;
+  }[] = tags.allTags.filter((tag) => tag.tagtitle === type);
+  console.log(category);
+
   const errorMsg: Error = {
     msg: 'No data to be found',
     status: false,
   };
 
   try {
+    const query = `query Works {
+          allWorkinfos(filter: {tags: {allIn: ${category[0].id}}}) {
+            title
+            year
+            instrument
+            id
+            tags {
+              tagtitle
+            }
+          }
+        }`;
     const response = await datoRequest({
       query: query,
     });
     return NextResponse.json(response);
   } catch (error) {
-    return NextResponse.json({ errorMsg });
+    const query = `query Works {
+      allWorkinfos(filter: {tags: {allIn: ${errorResponse.allTags[0].id}}}) {
+        title
+        year
+        instrument
+        id
+        tags {
+          tagtitle
+        }
+      }
+    }`;
+    const response = await datoRequest({
+      query: query,
+    });
+    return NextResponse.json(response);
   }
 }
