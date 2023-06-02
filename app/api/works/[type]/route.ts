@@ -19,43 +19,30 @@ export interface WorksInterface {
 }
 
 export interface TagsInterface {
-  allTags: {
-    id: number;
-    tagtitle: string;
-  }[];
+  allTags: Tag[];
 }
 
-async function fetchTags(): Promise<TagsInterface> {
-  const errorResponse = {
-    allTags: [
-      {
-        id: 156210071,
-        tagtitle: 'all',
-      },
-    ],
-  };
-  const query = `query Tags {
-        allTags {
-          id
-          tagtitle
-        }
-      }`;
-  const response = await datoRequest({
-    query: query,
-  });
-  if (!response) {
-    return errorResponse;
-  }
-  return response as TagsInterface;
+interface Tag {
+  id: number;
+  tagtitle: string;
 }
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const type = searchParams.get('type');
 
-  const tags: TagsInterface = await fetchTags();
+  const tagQuery = `query Tags {
+    allTags {
+      id
+      tagtitle
+    }
+  }`;
 
-  const errorResponse: TagsInterface = {
+  const tagResponse: TagsInterface | undefined = (await datoRequest({
+    query: tagQuery,
+  })) as TagsInterface;
+
+  const errorTag: TagsInterface = {
     allTags: [
       {
         id: 156210071,
@@ -64,16 +51,9 @@ export async function GET(request: Request) {
     ],
   };
 
-  const category: {
-    id: number;
-    tagtitle: string;
-  }[] = tags.allTags.filter((tag) => tag.tagtitle === type);
-  console.log(category);
-
-  const errorMsg: Error = {
-    msg: 'No data to be found',
-    status: false,
-  };
+  const category: Tag[] = tagResponse.allTags.filter(
+    (tag) => tag.tagtitle === type
+  );
 
   try {
     const query = `query Works {
@@ -93,7 +73,7 @@ export async function GET(request: Request) {
     return NextResponse.json(response);
   } catch (error) {
     const query = `query Works {
-      allWorkinfos(filter: {tags: {allIn: ${errorResponse.allTags[0].id}}}) {
+      allWorkinfos(filter: {tags: {allIn: ${errorTag.allTags[0].id}}}) {
         title
         year
         instrument
