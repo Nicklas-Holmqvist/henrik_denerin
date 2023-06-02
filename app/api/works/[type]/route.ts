@@ -25,7 +25,15 @@ export interface TagsInterface {
   }[];
 }
 
-async function fetchTags(): Promise<TagsInterface | null> {
+async function fetchTags(): Promise<TagsInterface> {
+  const errorResponse = {
+    allTags: [
+      {
+        id: 156210071,
+        tagtitle: 'all',
+      },
+    ],
+  };
   const query = `query Tags {
         allTags {
           id
@@ -36,7 +44,7 @@ async function fetchTags(): Promise<TagsInterface | null> {
     query: query,
   });
   if (!response) {
-    throw new Error('Failed to fetch data');
+    return errorResponse;
   }
   return response as TagsInterface;
 }
@@ -45,9 +53,9 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const type = searchParams.get('type');
 
-  const tags: TagsInterface | null = await fetchTags();
+  const tags: TagsInterface = await fetchTags();
 
-  const category = tags!.allTags.filter((tag) => tag.tagtitle === type);
+  const category = tags.allTags.filter((tag) => tag.tagtitle === type);
 
   const query = `query Works {
         allWorkinfos(filter: {tags: {allIn: ${category[0].id}}}) {
