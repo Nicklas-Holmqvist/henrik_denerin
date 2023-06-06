@@ -7,15 +7,17 @@ export interface Error {
 }
 
 export interface WorksInterface {
-  allWorkinfos: {
-    title: string;
-    year: string;
-    instrument: string;
-    id: number;
-    tags: {
-      tagtitle: string;
-    }[];
-  }[];
+  allWorkinfos: Works[];
+}
+
+export interface Works {
+  title: string;
+  year: string;
+  instrument: string;
+  id: number;
+  tags: {
+    tagtitle: string;
+  };
 }
 
 export interface TagsInterface {
@@ -38,28 +40,27 @@ export async function GET(request: Request) {
     }
   }`;
 
-  const tagResponse: TagsInterface | undefined = (await datoRequest({
+  let tagResponse: TagsInterface | undefined = (await datoRequest({
     query: tagQuery,
   })) as TagsInterface;
 
-  const errorTag: TagsInterface = {
-    allTags: [
-      {
-        id: 156210071,
-        tagtitle: 'all',
-      },
-    ],
-  };
+  if (tagResponse === undefined) {
+    tagResponse = (await datoRequest({
+      query: tagQuery,
+    })) as TagsInterface;
+  }
+
+  const errorTagID: number = 156210071;
 
   console.log(tagResponse);
 
-  const category: Tag[] = tagResponse.allTags.filter(
+  const tagID: Tag[] = tagResponse.allTags.filter(
     (tag) => tag.tagtitle === type
   );
 
   try {
     const query = `query Works {
-          allWorkinfos(filter: {tags: {allIn: ${category[0].id}}}) {
+          allWorkinfos(filter: {tags: {allIn: ${tagID[0].id}}}) {
             title
             year
             instrument
@@ -75,7 +76,7 @@ export async function GET(request: Request) {
     return NextResponse.json(response);
   } catch (error) {
     const query = `query Works {
-      allWorkinfos(filter: {tags: {allIn: ${errorTag.allTags[0].id}}}) {
+      allWorkinfos(filter: {tags: {allIn: ${errorTagID}}}) {
         title
         year
         instrument
