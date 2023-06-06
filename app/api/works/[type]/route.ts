@@ -51,6 +51,8 @@ export async function GET(request: Request) {
     (tag) => tag.tagtitle === type
   );
 
+  console.log(type);
+  console.log(tagResponse);
   console.log(tagID);
 
   try {
