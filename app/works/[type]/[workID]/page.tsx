@@ -3,14 +3,14 @@ import React, { Suspense } from 'react';
 import WorkInfo from '@/app/components/WorkInfo';
 
 interface WorkInfoProps {
-  params: { id: number };
+  params: { workID: number };
 }
 
-const WorkInfoPage: React.FC<WorkInfoProps> = ({ params: { id } }) => {
+const WorkInfoPage: React.FC<WorkInfoProps> = ({ params: { workID } }) => {
   return (
     <div>
       <Suspense fallback={<div>Laddar...</div>}>
-        <WorkInfo id={id} />
+        <WorkInfo workID={workID} />
       </Suspense>
     </div>
   );

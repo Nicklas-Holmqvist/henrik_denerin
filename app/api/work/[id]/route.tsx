@@ -6,12 +6,11 @@ export interface Error {
   status: boolean;
 }
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id');
+export async function POST(request: Request) {
+  const { workID } = await request.json();
 
   const query = `query work {
-    workinfo(filter:{id: {eq:${id}}}) {
+    workinfo(filter:{id: {eq:${workID}}}) {
       title
       year
       instrument

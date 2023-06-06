@@ -8,22 +8,27 @@ import MediaPlayer from './MediaPlayer';
 import { WorkInterface } from '@/types/work';
 
 interface WorkInfoProps {
-  id: number;
+  workID: number;
 }
 
-const WorkInfo: React.FC<WorkInfoProps> = ({ id }: WorkInfoProps) => {
+const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
   const [data, setData] = useState<WorkInterface | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ workID }),
+    };
     const fetchWork = async () => {
-      const res = await fetch(`/api/work/song?id=${id}`);
+      const res = await fetch(`/api/work/song?id=${workID}`, options);
       const response = await res.json();
       setData(response);
       setLoading(false);
     };
     fetchWork();
-  }, [id]);
+  }, [workID]);
 
   return (
     <section>
