@@ -3,17 +3,8 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-export interface WorksInterface {
-  allWorkinfos: {
-    title: string;
-    year: string;
-    instrument: string;
-    id: number;
-    tags: {
-      tagtitle: string;
-    }[];
-  }[];
-}
+import { Tag } from '../../types/tags';
+import { WorksInterface } from '../../types/works';
 
 interface WorksProps {
   type: string;
@@ -24,13 +15,28 @@ const Works: React.FC<WorksProps> = ({ type }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchWorks = async () => {
-      const res = await fetch(`/api/works/category?type=${type}`);
+    const fetchWorks = async (tagID: Tag[]) => {
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tagID }),
+      };
+      const res = await fetch(`/api/works/category?type=${type}`, options);
       const response = await res.json();
       setData(response);
       setLoading(false);
     };
-    fetchWorks();
+    const fetchTags = async () => {
+      const res = await fetch(`/api/tags`);
+      const response = await res.json();
+
+      const tagID: Tag[] = response.allTags.filter(
+        (tag: Tag) => tag.tagtitle === type
+      );
+      fetchWorks(tagID);
+    };
+
+    fetchTags();
   }, [type]);
 
   return (
