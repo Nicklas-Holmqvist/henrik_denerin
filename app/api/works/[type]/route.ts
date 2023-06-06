@@ -30,7 +30,10 @@ interface Tag {
 }
 
 export async function GET(request: Request) {
+  const errorTagID: number = 156210071;
   const { searchParams } = new URL(request.url);
+
+  //Get url param
   const type = searchParams.get('type');
 
   const tagQuery = `query Tags {
@@ -44,19 +47,11 @@ export async function GET(request: Request) {
     query: tagQuery,
   })) as TagsInterface;
 
-  if (tagResponse === undefined) {
-    tagResponse = (await datoRequest({
-      query: tagQuery,
-    })) as TagsInterface;
-  }
-
-  const errorTagID: number = 156210071;
-
-  console.log(tagResponse);
-
   const tagID: Tag[] = tagResponse.allTags.filter(
     (tag) => tag.tagtitle === type
   );
+
+  console.log(tagID);
 
   try {
     const query = `query Works {
@@ -73,6 +68,7 @@ export async function GET(request: Request) {
     const response = await datoRequest({
       query: query,
     });
+    console.log(response);
     return NextResponse.json(response);
   } catch (error) {
     const query = `query Works {
