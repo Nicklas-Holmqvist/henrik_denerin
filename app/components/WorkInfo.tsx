@@ -42,7 +42,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
           <h3 className="text-center pb-3 pt-2">
             for {data!.workinfo.instrument}
           </h3>
-          <p className="text-center py-1">
+          <p className="text-center py-1.5">
             <span className="font-bold">duration:</span>{' '}
             {data!.workinfo.duration}
           </p>
@@ -62,7 +62,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
             haveText={data!.workinfo.premiere}
           />
           {data!.workinfo.babelscore ? (
-            <p className="text-center font-bold py-1">
+            <p className="text-center font-bold py-1.5">
               score published by{' '}
               <Link
                 className="underline"
@@ -78,7 +78,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
           ) : null}
           {data!.workinfo.excerpt ? (
             <Image
-              className="m-auto"
+              className="m-auto py-1.5"
               src={data!.workinfo.excerpt?.url}
               width={400}
               height={200}
