@@ -14,7 +14,7 @@ const WorkInfoText: React.FC<WorkInfoTextProps> = ({
   return (
     <>
       {haveText ? (
-        <p className="text-center py-1">
+        <p className="text-center py-1.5">
           <span className="font-bold">{title}: </span>
           {text}
         </p>

@@ -40,13 +40,14 @@ const Works: React.FC<WorksProps> = ({ type }) => {
   }, [type]);
 
   return (
-    <article>
+    <article className="max-w-4xl m-auto">
       {loading && data === undefined ? null : (
         <>
+          <h1 className="pb-1">{type}</h1>
           {data!.allWorkinfos.map((work) => (
             <>
-              <Link href={`/works/${type}/${work.id}`}>
-                <h3 key={work.id} className="text-center py-1">
+              <Link key={work.id} href={`/works/${type}/${work.id}`}>
+                <h3 className="py-1.5">
                   {work.title} [{work.year}]
                   <span className="font-normal">
                     {' '}

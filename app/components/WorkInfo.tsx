@@ -32,12 +32,11 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
     fetchWork();
   }, [workID]);
 
-  console.log(data);
   return (
     <section>
       {loading ? null : (
         <>
-          <h1 key={data!.workinfo.id} className="text-center">
+          <h1 key={data!.workinfo.id} className="text-center pb-1">
             {data!.workinfo.title} [{data!.workinfo.year}]
           </h1>
           <h3 className="text-center pb-3 pt-2">
