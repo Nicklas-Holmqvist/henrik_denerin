@@ -12,7 +12,7 @@ const WorkCategoryPage: React.FC<WorkCategoryProps> = ({
   const formatString = type.replace('%20', ' ');
   return (
     <section>
-      <Suspense fallback={<div>Laddar</div>}>
+      <Suspense fallback={<div></div>}>
         <Works type={formatString} />
       </Suspense>
     </section>
