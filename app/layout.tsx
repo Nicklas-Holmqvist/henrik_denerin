@@ -5,7 +5,7 @@ import './globals.css';
 
 const archivo = Archivo({ subsets: ['latin'], variable: '--font-archivo' });
 const notoSans = Noto_Sans({
-  weight: '400',
+  weight: ['400', '500', '600'],
   subsets: ['latin'],
   variable: '--font-noto-sans',
 });
