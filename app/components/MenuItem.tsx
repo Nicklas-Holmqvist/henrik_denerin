@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 interface MenuItemProps {
   menuItems: {
@@ -14,6 +15,9 @@ interface MenuItemProps {
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({ menuItems }) => {
+  const pathname = usePathname();
+  const includesPathname = pathname.includes(menuItems.text);
+
   const [open, setOpen] = useState<boolean>(false);
 
   const subRef = React.useRef<HTMLDivElement>(null);
@@ -30,17 +34,36 @@ const MenuItem: React.FC<MenuItemProps> = ({ menuItems }) => {
 
   return (
     <div ref={subRef}>
-      <Link
-        href={menuItems.path}
-        onClick={() => setOpen(true)}
-        onMouseOver={() => setOpen(true)}>
-        {menuItems.text}
-      </Link>
+      {menuItems.text !== 'works' ? (
+        <Link
+          onMouseEnter={() => {
+            setOpen(false);
+          }}
+          className={
+            includesPathname
+              ? 'border-bottom font-medium'
+              : 'border-hover font-medium'
+          }
+          href={menuItems.path}>
+          {menuItems.text}
+        </Link>
+      ) : (
+        <p
+          className={
+            includesPathname
+              ? 'pt-0.5 border-bottom font-medium'
+              : 'pt-0.5 pointer-cursor font-medium border-hover'
+          }
+          onClick={() => setOpen(true)}
+          onMouseEnter={() => setOpen(true)}>
+          {menuItems.text}
+        </p>
+      )}
       {open ? (
-        <ul className="flex-row absolute w-40">
+        <ul className="flex-row absolute w-40 mt-2">
           {menuItems.categories.length !== 0
             ? menuItems.categories.map((category, index) => (
-                <li key={index} className="">
+                <li key={index} className="font-medium">
                   <Link
                     href={`/works/${category.tagtitle}`}
                     onClick={() => setOpen(false)}>

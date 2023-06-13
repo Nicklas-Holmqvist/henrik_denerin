@@ -39,6 +39,21 @@ p {
   font-size: 14px;
 }
 
+a {
+  font-family: var(--font-noto-sans);
+  font-size: 14px;
+}
+
 .markdown {
   white-space: break-spaces;
+}
+
+.border-bottom {
+  border-bottom: solid 2px var(--color-darkblue);
+  transition: border ease-in-out 0.1s;
+}
+
+.border-hover:hover {
+  border-bottom: solid 2px var(--color-darkblue);
+  transition: border ease-in-out 0.1s;
 }
