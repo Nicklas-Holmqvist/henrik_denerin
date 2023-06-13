@@ -1,11 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import React, { useEffect, useState } from 'react';
 
 import MediaPlayer from './MediaPlayer';
 import { WorkInterface } from '@/types/work';
+import WorkInfoText from './WorkInfoText';
 
 interface WorkInfoProps {
   workID: number;
@@ -30,6 +32,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
     fetchWork();
   }, [workID]);
 
+  console.log(data);
   return (
     <section>
       {loading ? null : (
@@ -44,33 +47,48 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
             <span className="font-bold">duration:</span>{' '}
             {data!.workinfo.duration}
           </p>
-          {data!.workinfo.dedication ? (
-            <p className="text-center py-1">
-              <span className="font-bold">written for:</span>{' '}
-              {data!.workinfo.dedication}
+          <WorkInfoText
+            title={'written for'}
+            text={data!.workinfo.dedication}
+            haveText={data!.workinfo.dedication}
+          />
+          <WorkInfoText
+            title={'commissioned by:'}
+            text={data!.workinfo.commision}
+            haveText={data!.workinfo.commision}
+          />
+          <WorkInfoText
+            title={'first performance'}
+            text={data!.workinfo.premiere}
+            haveText={data!.workinfo.premiere}
+          />
+          {data!.workinfo.babelscore ? (
+            <p className="text-center font-bold py-1">
+              score published by{' '}
+              <Link
+                className="underline"
+                href={`${data!.workinfo.babelscore}`}
+                rel="noopener noreferrer"
+                target="_blank">
+                Babelscore
+              </Link>
             </p>
           ) : null}
-          {data!.workinfo.premiere ? (
-            <p className="text-center py-1">
-              <span className="font-bold">first performance:</span>{' '}
-              {data!.workinfo.premiere}
-            </p>
-          ) : null}
-          <p className="text-center font-bold py-1">
-            score published by{' '}
-            <Link
-              className="underline"
-              href={`${data!.workinfo.babelscore}`}
-              rel="noopener noreferrer"
-              target="_blank">
-              Babelscore
-            </Link>
-          </p>
           {data!.workinfo.media ? (
             <MediaPlayer url={data!.workinfo.media} />
           ) : null}
+          {data!.workinfo.excerpt ? (
+            <Image
+              className="m-auto"
+              src={data!.workinfo.excerpt?.url}
+              width={400}
+              height={200}
+              alt={`${data!.workinfo.excerpt?.title}`}
+              priority
+            />
+          ) : null}
           {data!.workinfo.programnote ? (
-            <ReactMarkdown className="max-w-4xl m-auto py-4">
+            <ReactMarkdown className="max-w-4xl m-auto py-4 markdown">
               {data!.workinfo.programnote}
             </ReactMarkdown>
           ) : null}

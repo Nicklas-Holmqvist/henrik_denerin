@@ -38,3 +38,7 @@ p {
   font-family: var(--font-noto-sans);
   font-size: 14px;
 }
+
+.markdown {
+  white-space: break-spaces;
+}
