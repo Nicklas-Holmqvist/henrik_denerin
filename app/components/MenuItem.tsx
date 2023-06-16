@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 interface MenuItemProps {
+  dropdown: string;
+  setDropdown: (name: string) => void;
   menuItems: {
     text: string;
     path: string;
@@ -14,30 +16,33 @@ interface MenuItemProps {
   };
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ menuItems }) => {
+const MenuItem: React.FC<MenuItemProps> = ({
+  dropdown,
+  setDropdown,
+  menuItems,
+}) => {
   const pathname = usePathname();
   const includesPathname = pathname.includes(menuItems.text);
-
-  const [open, setOpen] = useState<boolean>(false);
+  const activeDropdown = dropdown === menuItems.text;
 
   const subRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleOutsideClick(event: any) {
       if (subRef.current && !subRef.current.contains(event.target)) {
-        setOpen(false);
+        setDropdown('');
       }
     }
     document.addEventListener('click', handleOutsideClick);
     return () => document.removeEventListener('click', handleOutsideClick);
-  }, [subRef]);
+  }, [setDropdown, subRef]);
 
   return (
     <div ref={subRef}>
       {menuItems.text !== 'works' ? (
         <Link
           onMouseEnter={() => {
-            setOpen(false);
+            setDropdown(menuItems.text);
           }}
           className={
             includesPathname
@@ -54,19 +59,19 @@ const MenuItem: React.FC<MenuItemProps> = ({ menuItems }) => {
               ? 'pt-0.5 border-bottom font-medium'
               : 'pt-0.5 pointer-cursor font-medium border-hover'
           }
-          onClick={() => setOpen(true)}
-          onMouseEnter={() => setOpen(true)}>
+          onClick={() => setDropdown(menuItems.text)}
+          onMouseEnter={() => setDropdown(menuItems.text)}>
           {menuItems.text}
         </p>
       )}
-      {open ? (
+      {activeDropdown ? (
         <ul className="flex-row absolute w-40 mt-2">
           {menuItems.categories.length !== 0
             ? menuItems.categories.map((category, index) => (
                 <li key={index} className="font-medium">
                   <Link
                     href={`/works/${category.tagtitle}`}
-                    onClick={() => setOpen(false)}>
+                    onClick={() => setDropdown('')}>
                     {category.tagtitle}
                   </Link>
                 </li>
