@@ -43,7 +43,11 @@ const Works: React.FC<WorksProps> = ({ type }) => {
     <article className="max-w-4xl m-auto">
       {loading && data === undefined ? null : (
         <>
-          <h1 className="pb-1">{type}</h1>
+          {type === 'all' ? (
+            <h1 className="pb-1">{type} works [chronological]</h1>
+          ) : (
+            <h1 className="pb-1">{type}</h1>
+          )}
           {data!.allWorkinfos.map((work) => (
             <>
               <Link key={work.id} href={`/works/${type}/${work.id}`}>
