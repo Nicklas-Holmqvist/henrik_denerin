@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
+import Solos from './Solos';
 import { Tag } from '../../types/tags';
 import { WorksInterface } from '../../types/works';
 
@@ -48,19 +49,25 @@ const Works: React.FC<WorksProps> = ({ type }) => {
           ) : (
             <h1 className="pb-1">{type}</h1>
           )}
-          {data!.allWorkinfos.map((work) => (
+          {type === 'solos' ? (
+            <Solos data={data!.allWorkinfos} type={type} />
+          ) : (
             <>
-              <Link key={work.id} href={`/works/${type}/${work.id}`}>
-                <h3 className="py-1.5">
-                  {work.title} [{work.year}]
-                  <span className="font-normal">
-                    {' '}
-                    &mdash; {work.instrument}
-                  </span>
-                </h3>
-              </Link>
+              {data!.allWorkinfos.map((work) => (
+                <>
+                  <Link key={work.id} href={`/works/${type}/${work.id}`}>
+                    <h3 className="py-1.5">
+                      {work.title} [{work.year}]
+                      <span className="font-normal">
+                        {' '}
+                        &mdash; {work.instrument}
+                      </span>
+                    </h3>
+                  </Link>
+                </>
+              ))}
             </>
-          ))}
+          )}
         </>
       )}
     </article>
