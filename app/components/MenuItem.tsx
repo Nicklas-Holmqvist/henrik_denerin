@@ -65,15 +65,25 @@ const MenuItem: React.FC<MenuItemProps> = ({
         </p>
       )}
       {activeDropdown ? (
-        <ul className="flex-row absolute w-40 mt-2">
+        <ul className="flex-row absolute w-44 mt-2">
           {menuItems.categories.length !== 0
             ? menuItems.categories.map((category, index) => (
                 <li key={index} className="font-medium">
-                  <Link
-                    href={`/works/${category.tagtitle}`}
-                    onClick={() => setDropdown('')}>
-                    {category.tagtitle}
-                  </Link>
+                  {category.tagtitle === 'all' ? (
+                    <div className="border-t border-b mt-1 pb-1 border-darkblue">
+                      <Link
+                        href={`/works/${category.tagtitle}`}
+                        onClick={() => setDropdown('')}>
+                        {category.tagtitle} works [chronological]
+                      </Link>
+                    </div>
+                  ) : (
+                    <Link
+                      href={`/works/${category.tagtitle}`}
+                      onClick={() => setDropdown('')}>
+                      {category.tagtitle}
+                    </Link>
+                  )}
                 </li>
               ))
             : null}
