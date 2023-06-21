@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer';
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
@@ -11,7 +10,14 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ src, alt }) => {
   return (
     <Link href="/">
-      <Image src={src} width={150} height={50} alt={`${alt}`} priority />
+      <Image
+        className="px-5 lg:max-2xl:px-0"
+        src={src}
+        width={150}
+        height={50}
+        alt={`${alt}`}
+        priority
+      />
     </Link>
   );
 };
