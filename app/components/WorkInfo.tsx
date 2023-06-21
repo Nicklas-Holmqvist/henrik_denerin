@@ -33,7 +33,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
   }, [workID]);
 
   return (
-    <section>
+    <section className="px-5 lg:max-2xl:px-0">
       {loading ? null : (
         <>
           <h1 key={data!.workinfo.id} className="text-center pb-1">
@@ -87,7 +87,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
             />
           ) : null}
           {data!.workinfo.programnote ? (
-            <ReactMarkdown className="max-w-4xl m-auto py-4 markdown">
+            <ReactMarkdown className="max-w-2xl m-auto py-4 markdown">
               {data!.workinfo.programnote}
             </ReactMarkdown>
           ) : null}

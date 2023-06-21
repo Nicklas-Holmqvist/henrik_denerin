@@ -41,7 +41,7 @@ const Works: React.FC<WorksProps> = ({ type }) => {
   }, [type]);
 
   return (
-    <article className="max-w-4xl m-auto">
+    <article className="max-w-2xl m-auto px-5 lg:max-2xl:px-0">
       {loading && data === undefined ? null : (
         <>
           {type === 'all' ? (
