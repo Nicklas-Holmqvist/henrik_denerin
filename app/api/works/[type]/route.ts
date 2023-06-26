@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
   try {
     const query = `query Works {
-          allWorkinfos(filter: {tags: {allIn: ${tagID[0].id}}}, orderBy: year_ASC) {
+          allWorkinfos(filter: {tags: {allIn: ${tagID[0].id}}}, orderBy: year_ASC, first: 100) {
             title
             year
             instrument
