@@ -13,8 +13,8 @@ const Logo: React.FC<LogoProps> = ({ src, alt }) => {
       <Image
         className="px-5 lg:max-2xl:px-0"
         src={src}
-        width={150}
-        height={50}
+        width={180}
+        height={60}
         alt={`${alt}`}
         priority
       />

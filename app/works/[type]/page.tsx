@@ -9,7 +9,7 @@ interface WorkCategoryProps {
 const WorkCategoryPage: React.FC<WorkCategoryProps> = ({
   params: { type },
 }) => {
-  const formatString = type.replace('%20', ' ');
+  const formatString = type.replace(/%20/g, ' ').replace(/%3E/g, '<');
   return (
     <section>
       <Suspense fallback={<div></div>}>

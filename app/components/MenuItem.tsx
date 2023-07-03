@@ -46,8 +46,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
           }}
           className={
             includesPathname
-              ? 'border-bottom font-medium'
-              : 'border-hover font-medium'
+              ? 'border-bottom font-medium text-lg pb-0.5'
+              : 'border-hover font-medium text-lg pb-0.5'
           }
           href={menuItems.path}>
           {menuItems.text}
@@ -56,8 +56,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
         <p
           className={
             includesPathname
-              ? 'pt-0.5 border-bottom font-medium'
-              : 'pt-0.5 pointer-cursor font-medium border-hover'
+              ? 'border-bottom font-medium text-lg'
+              : 'pointer-cursor font-medium border-hover text-lg'
           }
           onClick={() => setDropdown(menuItems.text)}
           onMouseEnter={() => setDropdown(menuItems.text)}>
