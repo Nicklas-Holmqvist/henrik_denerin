@@ -4,7 +4,7 @@ import { HeaderInterface } from '@/types/header';
 import { useEffect, useState } from 'react';
 
 import Logo from './Logo';
-import NavigationItem from './NavigationItem';
+import Navigation from './Navigation';
 import { useMediaQuery } from 'react-responsive';
 import MobileMenu from './MobileMenu';
 
@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = () => {
               setDrawer={() => setDrawer(!drawer)}
             />
           ) : (
-            <NavigationItem menuItems={data!.allNavigations} />
+            <Navigation menuItems={data!.allNavigations} />
           )}
         </nav>
       )}
