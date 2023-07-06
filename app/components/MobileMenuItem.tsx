@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import { motion } from 'framer-motion';
 
 import { MenuItem } from '@/types/menuItems';
 
@@ -17,10 +18,13 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
       {menuItem.text === 'works' ? (
         <>
           <li className="my-2 text-center text-2xl">{menuItem.text}</li>
-          <ul className="text-center">
+          <ul className="text-center pb-2">
             {menuItem.categories.length !== 0
               ? menuItem.categories.map((category, index) => (
-                  <li key={index}>
+                  <motion.li
+                    key={index}
+                    variants={motionNavLink}
+                    custom={index}>
                     {category.tagtitle === 'all' ? (
                       <div className="border-t border-b mt-1 pb-1 border-darkblue">
                         <Link
@@ -38,7 +42,7 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
                         {category.tagtitle}
                       </Link>
                     )}
-                  </li>
+                  </motion.li>
                 ))
               : null}
           </ul>
@@ -59,3 +63,15 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
 };
 
 export default MobileMenuItem;
+
+const motionNavLink = {
+  hidden: { opacity: 0, x: 30 },
+  visible: (index: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: index * 0.2,
+      duration: 0.3,
+    },
+  }),
+};
