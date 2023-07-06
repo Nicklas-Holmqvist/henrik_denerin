@@ -11,7 +11,11 @@ const HamburgerButton: React.FC<HamburgerButtonProps> = ({
 }) => {
   return (
     <button className="fixed top-4 left-5 z-50" {...props}>
-      {active ? <LuX size={32} /> : <LuMenu size={32} />}
+      {active ? (
+        <LuX size={32} className="animate-fadeIn" />
+      ) : (
+        <LuMenu size={32} className="animate-fadeIn" />
+      )}
     </button>
   );
 };
