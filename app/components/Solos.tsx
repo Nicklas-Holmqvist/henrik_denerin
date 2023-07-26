@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 
+import { SoloTags } from './Works';
+import { Works } from '../../types/works';
+
 interface SolosProps {
   data: {
     id: number;
@@ -9,31 +12,39 @@ interface SolosProps {
     instrument: string;
   }[];
   type: string;
+  soloTags: SoloTags;
 }
 
-const Solos: React.FC<SolosProps> = ({ data, type }) => {
+const Solos: React.FC<SolosProps> = ({ data, type, soloTags }) => {
   function sortIntruments() {
     let instrumentList = [];
-    for (let work of data) {
-      instrumentList.push(work.instrument);
+    for (let work of soloTags.allSoloTags) {
+      instrumentList.push(work.soloTagTitle);
     }
     let uniqueInstruments = [...new Set(instrumentList)];
     return uniqueInstruments;
   }
   const instruments = sortIntruments();
+
   return (
     <>
       {instruments.map((instrument) => (
         <div key={instrument} className="pb-3">
-          <h3 className="underline-offset-8 underline pb-1" key={instrument}>
+          <h2
+            className="pb-7 underline-offset-4 underline pt-8"
+            key={instrument}>
             {instrument}
-          </h3>
-          {data.map((work) => (
+          </h2>
+          {data.map((work: Works) => (
             <>
-              {work.instrument === instrument ? (
+              {work.soloTag!.soloTagTitle === instrument ? (
                 <Link key={work.id} href={`/works/${type}/${work.id}`}>
-                  <h3 className="py-1">
-                    {work.title} [{work.year}]
+                  <h3 className="py-2.5">
+                    {work.title} [{work.year}]{' '}
+                    <span className="font-normal">
+                      {' '}
+                      &mdash; {work.instrument}
+                    </span>
                   </h3>
                 </Link>
               ) : null}

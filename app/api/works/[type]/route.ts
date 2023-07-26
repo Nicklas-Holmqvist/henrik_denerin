@@ -9,16 +9,18 @@ export interface Error {
 export async function POST(request: Request) {
   const errorTagID: number = 156210071;
   const { tagID } = await request.json();
-
   try {
     const query = `query Works {
-          allWorkinfos(filter: {tags: {allIn: ${tagID[0].id}}}, orderBy: year_ASC, first: 100) {
+          allWorkinfos(filter: {tags: {allIn: ${tagID[0].id}}}, orderBy: year_DESC, first: 100) {
             title
             year
             instrument
             id
             tags {
               tagtitle
+            }
+            soloTag {
+              soloTagTitle
             }
           }
         }`;
@@ -35,6 +37,9 @@ export async function POST(request: Request) {
         id
         tags {
           tagtitle
+        }
+        soloTag {
+          soloTagTitle
         }
       }
     }`;
