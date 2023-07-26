@@ -9,7 +9,7 @@ interface MediaPlayerProps {
 
 const MediaPlayer: React.FC<MediaPlayerProps> = ({ url }) => {
   return (
-    <article className="flex justify-center m-auto py-4">
+    <article className="flex justify-center m-auto py-16">
       {url.includes('soundcloud') ? (
         <Soundcloud url={url} />
       ) : (

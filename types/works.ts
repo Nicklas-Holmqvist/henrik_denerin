@@ -7,7 +7,10 @@ export interface Works {
   year: string;
   instrument: string;
   id: number;
-  tags: {
+  tags?: {
     tagtitle: string;
+  };
+  soloTag?: {
+    soloTagTitle: string;
   };
 }

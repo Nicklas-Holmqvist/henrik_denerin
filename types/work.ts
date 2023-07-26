@@ -20,6 +20,9 @@ export interface WorkInterface {
     tags?: {
       tagTitle: string;
     };
+    soloTag?: {
+      soloTagTitle: string;
+    };
     id: number;
   };
 }

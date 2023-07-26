@@ -6,8 +6,8 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import React, { useEffect, useState } from 'react';
 
 import MediaPlayer from './MediaPlayer';
-import { WorkInterface } from '@/types/work';
 import WorkInfoText from './WorkInfoText';
+import { WorkInterface } from '@/types/work';
 
 interface WorkInfoProps {
   workID: number;
@@ -37,9 +37,12 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
       {loading ? null : (
         <>
           <h1 key={data!.workinfo.id} className="text-center pb-1">
-            {data!.workinfo.title} [{data!.workinfo.year}]
+            {data!.workinfo.title}
           </h1>
-          <h3 className="text-center pb-3 pt-2">
+          <h2 key={data!.workinfo.id} className="text-center pb-1">
+            [{data!.workinfo.year}]
+          </h2>
+          <h3 className="text-center pb-20 pt-2 font-normal">
             for {data!.workinfo.instrument}
           </h3>
           <p className="text-center py-1.5">
@@ -52,7 +55,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
             haveText={data!.workinfo.dedication}
           />
           <WorkInfoText
-            title={'commissioned by:'}
+            title={'commissioned by'}
             text={data!.workinfo.commision}
             haveText={data!.workinfo.commision}
           />
@@ -62,7 +65,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
             haveText={data!.workinfo.premiere}
           />
           {data!.workinfo.babelscore ? (
-            <p className="text-center font-bold py-1.5">
+            <p className="text-center font-bold py-1.5 pt-8">
               score published by{' '}
               <Link
                 className="underline"
@@ -76,6 +79,11 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
           {data!.workinfo.media ? (
             <MediaPlayer url={data!.workinfo.media} />
           ) : null}
+          {data!.workinfo.programnote ? (
+            <ReactMarkdown className="max-w-2xl m-auto py-4 pb-16 markdown">
+              {data!.workinfo.programnote}
+            </ReactMarkdown>
+          ) : null}
           {data!.workinfo.excerpt ? (
             <Image
               className="m-auto py-1.5"
@@ -85,11 +93,6 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
               alt={`${data!.workinfo.excerpt?.title}`}
               priority
             />
-          ) : null}
-          {data!.workinfo.programnote ? (
-            <ReactMarkdown className="max-w-2xl m-auto py-4 markdown">
-              {data!.workinfo.programnote}
-            </ReactMarkdown>
           ) : null}
         </>
       )}

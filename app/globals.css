@@ -6,6 +6,7 @@
   --color-darkblue: #04194f;
   --color-blue: #072c89;
   --color-white: #f4f4f9;
+  --color-bg-darkblue: #04194f0e;
 }
 
 * {
@@ -17,6 +18,7 @@
 body {
   color: var(--color-darkblue);
   background: var(--color-white);
+  padding-bottom: 4rem;
 }
 
 section {
@@ -61,6 +63,10 @@ a {
 .border-hover:hover {
   border-bottom: solid 2px var(--color-darkblue);
   transition: border ease-in-out 0.1s;
+}
+
+.background-text {
+  background-color: var(--color-bg-darkblue);
 }
 
 @media (max-width: 800px) {

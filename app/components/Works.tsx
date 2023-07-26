@@ -10,10 +10,19 @@ import { WorksInterface } from '../../types/works';
 interface WorksProps {
   type: string;
 }
+export interface SoloTags {
+  allSoloTags: SoloTag[];
+}
+
+export interface SoloTag {
+  soloTagTitle: string;
+  id: number;
+}
 
 const Works: React.FC<WorksProps> = ({ type }) => {
   const [data, setData] = useState<WorksInterface | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
+  const [soloTags, setSoloTags] = useState<SoloTags | undefined>(undefined);
 
   useEffect(() => {
     const fetchWorks = async (tagID: Tag[]) => {
@@ -37,6 +46,15 @@ const Works: React.FC<WorksProps> = ({ type }) => {
       fetchWorks(tagID);
     };
 
+    if (type === 'solos') {
+      const fetchSoloTags = async () => {
+        const res = await fetch(`/api/solotags`);
+        const response = await res.json();
+        setSoloTags(response);
+      };
+      fetchSoloTags();
+    }
+
     fetchTags();
   }, [type]);
 
@@ -45,18 +63,20 @@ const Works: React.FC<WorksProps> = ({ type }) => {
       {loading && data === undefined ? null : (
         <>
           {type === 'all' ? (
-            <h1 className="pb-1">{type} works [chronological]</h1>
-          ) : (
-            <h1 className="pb-1">{type}</h1>
-          )}
+            <h1 className="pb-6 underline-offset-4 underline pb-1">
+              {type} works [chronological]
+            </h1>
+          ) : type !== 'solos' ? (
+            <h1 className="pb-6 underline-offset-4 underline pb-1">{type}</h1>
+          ) : undefined}
           {type === 'solos' ? (
-            <Solos data={data!.allWorkinfos} type={type} />
+            <Solos data={data!.allWorkinfos} type={type} soloTags={soloTags!} />
           ) : (
             <>
               {data!.allWorkinfos.map((work) => (
                 <>
                   <Link key={work.id} href={`/works/${type}/${work.id}`}>
-                    <h3 className="py-1.5">
+                    <h3 className="py-2.5">
                       {work.title} [{work.year}]
                       <span className="font-normal">
                         {' '}
