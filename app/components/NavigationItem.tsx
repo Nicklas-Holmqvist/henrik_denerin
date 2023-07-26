@@ -37,9 +37,9 @@ const NavigationItem: React.FC<navigationItemProps> = ({
     <div ref={subRef}>
       {menuItems.text !== 'works' ? (
         <Link
-          onMouseEnter={() => {
-            setDropdown(menuItems.text);
-          }}
+          // onMouseEnter={() => {
+          //   setDropdown(menuItems.text);
+          // }}
           className={
             includesPathname
               ? 'border-bottom font-medium text-lg pb-0.5'
@@ -49,42 +49,45 @@ const NavigationItem: React.FC<navigationItemProps> = ({
           {menuItems.text}
         </Link>
       ) : (
-        <p
-          className={
-            includesPathname
-              ? 'border-bottom font-medium text-lg'
-              : 'pointer-cursor font-medium border-hover text-lg'
-          }
+        <div
           onClick={() => setDropdown(menuItems.text)}
-          onMouseEnter={() => setDropdown(menuItems.text)}>
-          {menuItems.text}
-        </p>
+          onMouseEnter={() => setDropdown(menuItems.text)}
+          onMouseLeave={() => setDropdown('')}>
+          <p
+            className={
+              includesPathname
+                ? 'border-bottom font-medium text-lg'
+                : 'pointer-cursor font-medium border-hover text-lg'
+            }>
+            {menuItems.text}
+          </p>
+          {activeDropdown ? (
+            <ul className="flex-row absolute w-44 pt-2">
+              {menuItems.categories.length !== 0
+                ? menuItems.categories.map((category, index) => (
+                    <li key={index} className="font-medium">
+                      {category.tagtitle === 'all' ? (
+                        <div className="border-t border-b mt-1 pb-1 border-darkblue">
+                          <Link
+                            href={`/works/${category.tagtitle}`}
+                            onClick={() => setDropdown('')}>
+                            {category.tagtitle} works [chronological]
+                          </Link>
+                        </div>
+                      ) : (
+                        <Link
+                          href={`/works/${category.tagtitle}`}
+                          onClick={() => setDropdown('')}>
+                          {category.tagtitle}
+                        </Link>
+                      )}
+                    </li>
+                  ))
+                : null}
+            </ul>
+          ) : null}
+        </div>
       )}
-      {activeDropdown ? (
-        <ul className="flex-row absolute w-44 mt-2">
-          {menuItems.categories.length !== 0
-            ? menuItems.categories.map((category, index) => (
-                <li key={index} className="font-medium">
-                  {category.tagtitle === 'all' ? (
-                    <div className="border-t border-b mt-1 pb-1 border-darkblue">
-                      <Link
-                        href={`/works/${category.tagtitle}`}
-                        onClick={() => setDropdown('')}>
-                        {category.tagtitle} works [chronological]
-                      </Link>
-                    </div>
-                  ) : (
-                    <Link
-                      href={`/works/${category.tagtitle}`}
-                      onClick={() => setDropdown('')}>
-                      {category.tagtitle}
-                    </Link>
-                  )}
-                </li>
-              ))
-            : null}
-        </ul>
-      ) : null}
     </div>
   );
 };
