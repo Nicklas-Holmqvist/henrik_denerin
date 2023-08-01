@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   useEffect(() => {
     const fetchCourses = async () => {
-      const res = await fetch('/api/header');
+      const res = await fetch('/api/header', { next: { revalidate: 3600 } });
       const response = await res.json();
       setData(response);
       setLoading(false);

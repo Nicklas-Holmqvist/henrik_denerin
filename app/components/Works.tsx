@@ -30,6 +30,7 @@ const Works: React.FC<WorksProps> = ({ type }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ tagID }),
+        next: { revalidate: 3600 },
       };
       const res = await fetch(`/api/works/category?type=${type}`, options);
       const response = await res.json();
@@ -37,7 +38,7 @@ const Works: React.FC<WorksProps> = ({ type }) => {
       setLoading(false);
     };
     const fetchTags = async () => {
-      const res = await fetch(`/api/tags`);
+      const res = await fetch(`/api/tags`, { next: { revalidate: 3600 } });
       const response = await res.json();
 
       const tagID: Tag[] = response.allTags.filter(
@@ -48,7 +49,9 @@ const Works: React.FC<WorksProps> = ({ type }) => {
 
     if (type === 'solos') {
       const fetchSoloTags = async () => {
-        const res = await fetch(`/api/solotags`);
+        const res = await fetch(`/api/solotags`, {
+          next: { revalidate: 3600 },
+        });
         const response = await res.json();
         setSoloTags(response);
       };
