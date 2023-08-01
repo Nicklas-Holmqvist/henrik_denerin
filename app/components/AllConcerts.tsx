@@ -28,7 +28,7 @@ const AllConcerts: React.FC<ConcertProps> = ({}) => {
 
   useEffect(() => {
     const fetchConcerts = async () => {
-      const res = await fetch(`/api/concerts`);
+      const res = await fetch(`/api/concerts`, { next: { revalidate: 60 } });
       const response = await res.json();
       setConcerts(response);
       setYears(sortYear(response));
