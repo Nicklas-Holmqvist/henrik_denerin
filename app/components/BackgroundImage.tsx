@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 
 interface BackgroundImageProps {}
@@ -23,23 +23,50 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({}) => {
     if (image < images.length - 1) {
       const interval = setInterval(() => {
         setImage(image + 1);
-      }, 2500);
+      }, 1500);
       return () => clearInterval(interval);
     } else {
       return;
     }
   }, [image, images.length]);
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { duration: 2 },
-      }}>
-      <Image src={`${images[image]}`} width={900} height={500} alt="notes" />
-    </motion.div>
-  );
+  const BackgroundImg = ({ number }: { number: number }) => {
+    return (
+      <>
+        {number === 6 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 1.5 },
+            }}>
+            <Image
+              src={`/images/image-${image + 1}.png`}
+              width={900}
+              height={500}
+              alt="notes"
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 1 },
+            }}>
+            <Image
+              src={`/images/image-${image + 1}.png`}
+              width={900}
+              height={500}
+              alt="notes"
+            />
+          </motion.div>
+        )}
+      </>
+    );
+  };
+
+  return <BackgroundImg number={image} />;
 };
 
 export default BackgroundImage;

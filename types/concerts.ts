@@ -1,8 +1,4 @@
 export interface ConcertsInterface {
-  allConcerts: ConcertInterface[];
-}
-
-export interface ConcertInterface {
   date: any;
   place: string;
   piece: string;

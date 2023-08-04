@@ -7,14 +7,14 @@ import Concert from './Concert';
 interface ConcertProps {}
 
 const AllConcerts: React.FC<ConcertProps> = ({}) => {
-  const [concerts, setConcerts] = useState<ConcertsInterface | undefined>(
+  const [concerts, setConcerts] = useState<ConcertsInterface[] | undefined>(
     undefined
   );
   const [years, setYears] = useState<number[] | undefined>(undefined);
 
   function sortYear(data: any) {
     let years = [];
-    for (let year of data!.allConcerts) {
+    for (let year of data) {
       const getYear = new Date(year.date).getFullYear();
       years.push(getYear);
     }
@@ -35,6 +35,7 @@ const AllConcerts: React.FC<ConcertProps> = ({}) => {
     };
     fetchConcerts();
   }, []);
+  console.log(concerts);
 
   return (
     <>
@@ -45,7 +46,7 @@ const AllConcerts: React.FC<ConcertProps> = ({}) => {
               <h2 className="py-7" key={id}>
                 {year}
               </h2>
-              {concerts!.allConcerts.map((concert, id: number) => (
+              {concerts.map((concert, id: number) => (
                 <>
                   {findYear(concert.date, year) ? (
                     <div key={id} className="py-2.5">
