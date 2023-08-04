@@ -2,10 +2,11 @@
 
 import React from 'react';
 import { getMonth } from '@/utils/getMonthName';
-import { ConcertInterface } from '@/types/concerts';
+import { ConcertsInterface } from '@/types/concerts';
+import Link from 'next/link';
 
 interface ConcertProps {
-  concert: ConcertInterface;
+  concert: ConcertsInterface;
 }
 
 const Concert: React.FC<ConcertProps> = ({ concert }) => {
@@ -29,7 +30,11 @@ const Concert: React.FC<ConcertProps> = ({ concert }) => {
       {concert.additionalInfo !== null ? (
         <p>{concert.additionalInfo}</p>
       ) : undefined}
-      {concert.link !== null ? <p>{concert.link}</p> : undefined}
+      {concert.link !== '' ? (
+        <Link href={`${concert.link}`} target="_blank">
+          Link
+        </Link>
+      ) : undefined}
     </>
   );
 };

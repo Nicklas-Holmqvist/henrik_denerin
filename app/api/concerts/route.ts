@@ -15,6 +15,23 @@ const query = `query Concerts {
       additionalInfo
       firstPerformance
       time
+      link
+    }
+    _allConcertsMeta {
+      count
+    }
+  }`;
+
+const secondQuery = `query Concerts {
+    allConcerts(orderBy: date_DESC, first:100, skip: 100) {
+      date
+      place
+      piece
+      performer
+      additionalInfo
+      firstPerformance
+      time
+      link
     }
   }`;
 
@@ -23,11 +40,20 @@ export async function GET() {
     msg: 'No data to be found',
     status: false,
   };
-
+  let response: any = [];
   try {
-    const response = await datoRequest({
+    const res: any = await datoRequest({
       query: query,
     });
+    response.push({ allConcerts: res.allConcerts });
+    if (res._allConcertsMeta.count >= 100) {
+      const secondRes: any = await datoRequest({
+        query: secondQuery,
+      });
+      return NextResponse.json(
+        (response = response[0].allConcerts.concat(secondRes.allConcerts))
+      );
+    }
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json({ errorMsg });
