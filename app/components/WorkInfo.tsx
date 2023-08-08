@@ -22,7 +22,7 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ workID }),
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     };
     const fetchWork = async () => {
       const res = await fetch(`/api/work/song?id=${workID}`, options);

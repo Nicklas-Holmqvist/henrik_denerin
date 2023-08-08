@@ -16,6 +16,7 @@ const query = `query Concerts {
       firstPerformance
       time
       link
+      linkTitle
     }
     _allConcertsMeta {
       count
@@ -32,6 +33,7 @@ const secondQuery = `query Concerts {
       firstPerformance
       time
       link
+      linkTitle
     }
   }`;
 

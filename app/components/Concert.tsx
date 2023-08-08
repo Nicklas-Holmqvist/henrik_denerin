@@ -31,8 +31,11 @@ const Concert: React.FC<ConcertProps> = ({ concert }) => {
         <p>{concert.additionalInfo}</p>
       ) : undefined}
       {concert.link !== '' ? (
-        <Link href={`${concert.link}`} target="_blank">
-          Link
+        <Link
+          href={`${concert.link}`}
+          target="_blank"
+          className="border-bottom pb-0.5">
+          {concert.linkTitle !== '' ? concert.linkTitle : 'Link'}
         </Link>
       ) : undefined}
     </>

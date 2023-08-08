@@ -2,6 +2,10 @@ import React, { Suspense } from 'react';
 
 import Works from '@/app/components/Works';
 
+export const metadata = {
+  title: 'Works | Composer Henrik Denerin portfolio',
+};
+
 interface WorkCategoryProps {
   params: { type: string };
 }

@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { LuMail } from '@metamist/lucide-react';
+import React, { useState } from 'react';
 
 import NavigationItem from './NavigationItem';
 import { MenuItem } from '@/types/menuItems';
@@ -29,6 +30,21 @@ const Navigation: React.FC<NavigationProps> = ({ menuItems }) => {
           />
         </motion.li>
       ))}
+      <motion.a
+        href="mailto:info@denerin.org"
+        className="pl-2"
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 0.5, delay: 0.5 },
+          y: 6,
+        }}
+        whileHover={{
+          scale: 1.05,
+          transition: { duration: 0.2 },
+        }}>
+        <LuMail size={18} />
+      </motion.a>
     </ul>
   );
 };

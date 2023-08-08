@@ -35,7 +35,6 @@ const AllConcerts: React.FC<ConcertProps> = ({}) => {
     };
     fetchConcerts();
   }, []);
-  console.log(concerts);
 
   return (
     <>

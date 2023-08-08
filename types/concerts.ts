@@ -6,5 +6,6 @@ export interface ConcertsInterface {
   additionalInfo?: string;
   firstPerformance?: boolean;
   link?: string;
+  linkTitle?: string;
   time?: string;
 }
