@@ -14,6 +14,7 @@ module.exports = {
     extend: {
       animation: {
         fadeIn: 'fadeIn 0.2s ease-in',
+        fadeInBg: 'fadeIn 1s ease-in forwards',
       },
       keyframes: {
         fadeIn: {

@@ -1,9 +1,10 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import HamburgerButton from './HamburgerButton';
 import MobileMenuItem from './MobileMenuItem';
 import { MenuItem } from '@/types/menuItems';
-import { motion, AnimatePresence } from 'framer-motion';
+import { LuMail } from '@metamist/lucide-react';
 
 interface MobileMenuProps {
   drawer: boolean;
@@ -38,6 +39,21 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                   <MobileMenuItem setDrawer={setDrawer} menuItem={menuItem} />
                 </motion.div>
               ))}
+              <motion.a
+                href="mailto:info@denerin.org"
+                className="pl-2"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: { duration: 0.5, delay: 0.5 },
+                  y: 6,
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.2 },
+                }}>
+                <LuMail size={18} />
+              </motion.a>
             </ul>
           </motion.aside>
         </AnimatePresence>

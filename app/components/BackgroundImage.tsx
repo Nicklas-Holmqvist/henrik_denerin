@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { easeInOut, motion } from 'framer-motion';
+import { AnimatePresence, easeInOut, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 
 interface BackgroundImageProps {}
@@ -30,43 +30,35 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({}) => {
     }
   }, [image, images.length]);
 
-  const BackgroundImg = ({ number }: { number: number }) => {
-    return (
-      <>
-        {number === 6 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 1.5 },
-            }}>
-            <Image
-              src={`/images/image-${image + 1}.png`}
-              width={900}
-              height={500}
-              alt="notes"
-            />
-          </motion.div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 1 },
-            }}>
-            <Image
-              src={`/images/image-${image + 1}.png`}
-              width={900}
-              height={500}
-              alt="notes"
-            />
-          </motion.div>
-        )}
-      </>
-    );
-  };
-
-  return <BackgroundImg number={image} />;
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="static"
+        key={image}
+        animate={{
+          opacity: 1,
+          transition: { duration: 0.5, delay: 0.2 },
+        }}
+        exit={{ opacity: 0 }}>
+        <div className="flex justify-center m-auto ">
+          <Image
+            className="absolute"
+            src={`/images/image-${1}.png`}
+            width={900}
+            height={500}
+            alt="notes"
+          />
+          <Image
+            className="absolute"
+            src={`/images/image-${image + 1}.png`}
+            width={900}
+            height={500}
+            alt="notes"
+          />
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
 };
 
 export default BackgroundImage;
