@@ -44,7 +44,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({}) => {
           <div className="flex justify-center m-auto ">
             <Image
               className="absolute"
-              src={`/images/image-${1}.png`}
+              src={`/images/image-${image === 0 ? image + 1 : image}.png`}
               width={900}
               height={500}
               alt="notes"
