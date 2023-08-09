@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { AnimatePresence, easeInOut, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 
 interface BackgroundImageProps {}
@@ -31,33 +31,39 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({}) => {
   }, [image, images.length]);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        className="static"
-        key={image}
-        animate={{
-          opacity: 1,
-          transition: { duration: 0.5, delay: 0.2 },
-        }}
-        exit={{ opacity: 0 }}>
-        <div className="flex justify-center m-auto ">
-          <Image
-            className="absolute"
-            src={`/images/image-${1}.png`}
-            width={900}
-            height={500}
-            alt="notes"
-          />
-          <Image
-            className="absolute"
-            src={`/images/image-${image + 1}.png`}
-            width={900}
-            height={500}
-            alt="notes"
-          />
-        </div>
-      </motion.div>
-    </AnimatePresence>
+    <div className="animate-fadeInBg">
+      <AnimatePresence>
+        <motion.div
+          className="static"
+          key={image}
+          animate={{
+            opacity: 1,
+            transition: { duration: 0.5, delay: 0.2 },
+          }}
+          exit={{ opacity: 0 }}>
+          <div className="flex justify-center m-auto ">
+            <Image
+              className="absolute"
+              src={`/images/image-${1}.png`}
+              width={900}
+              height={500}
+              alt="notes"
+              quality={10}
+              priority
+            />
+            <Image
+              className="absolute"
+              src={`/images/image-${image + 1}.png`}
+              width={900}
+              height={500}
+              alt="notes"
+              quality={10}
+              priority
+            />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 };
 
