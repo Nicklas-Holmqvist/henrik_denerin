@@ -4,8 +4,8 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 import Solos from './Solos';
-import { Tag } from '../../types/tags';
-import { WorksInterface } from '../../types/works';
+import { Tag } from '../../../types/tags';
+import { WorksInterface } from '../../../types/works';
 
 interface WorksProps {
   type: string;

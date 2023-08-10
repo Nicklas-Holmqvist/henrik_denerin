@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-import Works from '@/app/components/Works';
+import Works from '@/app/works/[type]/Works';
 
 export const metadata = {
   title: 'Works | Composer Henrik Denerin portfolio',

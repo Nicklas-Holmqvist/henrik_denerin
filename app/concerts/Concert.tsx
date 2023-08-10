@@ -1,13 +1,16 @@
-'use client';
-
 import React from 'react';
+import Link from 'next/link';
+
 import { getMonth } from '@/utils/getMonthName';
 import { ConcertsInterface } from '@/types/concerts';
-import Link from 'next/link';
 
 interface ConcertProps {
   concert: ConcertsInterface;
 }
+
+export const metadata = {
+  title: 'Concerts | Composer Henrik Denerin',
+};
 
 const Concert: React.FC<ConcertProps> = ({ concert }) => {
   const day = new Date(concert.date).getDate();

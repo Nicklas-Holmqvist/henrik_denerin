@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { SoloTags } from './Works';
-import { Works } from '../../types/works';
+import { Works } from '../../../types/works';
 
 interface SolosProps {
   data: {
