@@ -10,6 +10,7 @@ async function getAbout() {
   );
 
   if (!res.ok) return notFound();
+  console.log(res.json());
 
   return res.json();
 }
