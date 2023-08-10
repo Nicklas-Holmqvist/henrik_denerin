@@ -55,6 +55,10 @@ a {
   white-space: break-spaces;
 }
 
+.awards > p {
+  line-height: 2rem;
+}
+
 .border-bottom {
   border-bottom: solid 2px var(--color-darkblue);
   transition: border ease-in-out 0.1s;
