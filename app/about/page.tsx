@@ -5,7 +5,9 @@ import Image from 'next/image';
 import { AboutInterface } from '@/types/about';
 
 async function getAbout() {
-  const res = await fetch('http://localhost:3000/api/about');
+  const res = await fetch(
+    'https://stupendous-cobbler-4ff55e.netlify.app/api/about'
+  );
 
   if (!res.ok) return notFound();
 
