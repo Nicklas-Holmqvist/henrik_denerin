@@ -7,6 +7,7 @@ import { Works } from '../../types/works';
 interface SolosProps {
   data: {
     id: number;
+    param: string;
     year: string;
     title: string;
     instrument: string;
@@ -38,7 +39,7 @@ const Solos: React.FC<SolosProps> = ({ data, type, soloTags }) => {
           {data.map((work: Works) => (
             <>
               {work.soloTag!.soloTagTitle === instrument ? (
-                <Link key={work.id} href={`/works/${type}/${work.id}`}>
+                <Link key={work.id} href={`/works/${type}/${work.param}`}>
                   <h3 className="py-2.5">
                     {work.title} [{work.year}]{' '}
                     <span className="font-normal">

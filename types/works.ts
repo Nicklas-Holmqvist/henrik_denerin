@@ -7,6 +7,7 @@ export interface Works {
   year: string;
   instrument: string;
   id: number;
+  param: string;
   tags?: {
     tagtitle: string;
   };

@@ -24,5 +24,6 @@ export interface WorkInterface {
       soloTagTitle: string;
     };
     id: number;
+    param: string;
   };
 }

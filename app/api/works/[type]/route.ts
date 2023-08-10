@@ -16,6 +16,7 @@ export async function POST(request: Request) {
             year
             instrument
             id
+            param
             tags {
               tagtitle
             }
