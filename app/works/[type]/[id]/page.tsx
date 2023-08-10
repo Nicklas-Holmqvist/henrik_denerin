@@ -7,14 +7,14 @@ export const metadata = {
 };
 
 interface WorkInfoProps {
-  params: { workID: number };
+  params: { id: string };
 }
 
-const WorkInfoPage: React.FC<WorkInfoProps> = ({ params: { workID } }) => {
+const WorkInfoPage: React.FC<WorkInfoProps> = ({ params: { id } }) => {
   return (
     <div>
       <Suspense fallback={<div></div>}>
-        <WorkInfo workID={workID} />
+        <WorkInfo id={id} />
       </Suspense>
     </div>
   );

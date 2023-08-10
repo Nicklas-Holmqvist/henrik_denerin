@@ -10,10 +10,10 @@ import WorkInfoText from './WorkInfoText';
 import { WorkInterface } from '@/types/work';
 
 interface WorkInfoProps {
-  workID: number;
+  id: string;
 }
 
-const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
+const WorkInfo: React.FC<WorkInfoProps> = ({ id }: WorkInfoProps) => {
   const [data, setData] = useState<WorkInterface | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -21,17 +21,17 @@ const WorkInfo: React.FC<WorkInfoProps> = ({ workID }: WorkInfoProps) => {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ workID }),
+      body: JSON.stringify({ id }),
       next: { revalidate: 60 },
     };
     const fetchWork = async () => {
-      const res = await fetch(`/api/work/song?id=${workID}`, options);
+      const res = await fetch(`/api/work/song?id=${id}`, options);
       const response = await res.json();
       setData(response);
       setLoading(false);
     };
     fetchWork();
-  }, [workID]);
+  }, [id]);
 
   return (
     <section className="px-5 lg:max-2xl:px-0">

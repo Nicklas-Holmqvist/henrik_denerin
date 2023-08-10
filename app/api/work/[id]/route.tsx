@@ -7,10 +7,9 @@ export interface Error {
 }
 
 export async function POST(request: Request) {
-  const { workID } = await request.json();
-
+  const { id } = await request.json();
   const query = `query work {
-    workinfo(filter:{id: {eq:${workID}}}) {
+    workinfo(filter: {param: {eq:"${id}"}}) {
       title
       year
       instrument
@@ -29,6 +28,7 @@ export async function POST(request: Request) {
         tagtitle
       }
       id
+      param
     }
   }`;
   const errorMsg: Error = {

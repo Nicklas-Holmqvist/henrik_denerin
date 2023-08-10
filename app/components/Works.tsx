@@ -78,7 +78,7 @@ const Works: React.FC<WorksProps> = ({ type }) => {
             <>
               {data!.allWorkinfos.map((work) => (
                 <>
-                  <Link key={work.id} href={`/works/${type}/${work.id}`}>
+                  <Link key={work.id} href={`/works/${type}/${work.param}`}>
                     <h3 className="py-2.5">
                       {work.title} [{work.year}]
                       <span className="font-normal">
