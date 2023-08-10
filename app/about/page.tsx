@@ -3,16 +3,24 @@ import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 
 import { AboutInterface } from '@/types/about';
+import { Metadata } from 'next';
 
 async function getAbout() {
   const res = await fetch(
-    'https://stupendous-cobbler-4ff55e.netlify.app/api/about'
+    'https://stupendous-cobbler-4ff55e.netlify.app/api/about',
+    { next: { revalidate: 3600 } }
   );
 
   if (!res.ok) return notFound();
 
   return res.json();
 }
+
+export const metadata: Metadata = {
+  title: 'Composer Henrik Denerin | Aboutpage',
+  description:
+    'Henrik Denerin born 1978, is a Swedish composer and improvising performer whose works often prioritizes exploration over predictability, aiming to expand musical expression and meaning, challenging the relationship between score and sound while engaging performers as collaborators.',
+};
 
 export default async function About() {
   const about: AboutInterface = await getAbout();
