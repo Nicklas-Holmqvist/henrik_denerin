@@ -22,7 +22,7 @@ async function getWorkList(tagId: Tag[]) {
     next: { revalidate: 3600 },
   };
   const res = await fetch(
-    `http://localhost:3000/api/works/category?type=${tagId}`,
+    `${process.env.API}/works/category?type=${tagId}`,
     options
   );
 
