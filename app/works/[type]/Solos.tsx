@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
+import { notFound } from 'next/navigation';
 
-import { SoloTags } from './Works';
-import { Works } from '../../../types/works';
+import { SoloTags, Work } from '@/types/works';
 
 interface SolosProps {
-  data: {
+  workList: {
     id: number;
     param: string;
     year: string;
@@ -13,10 +13,24 @@ interface SolosProps {
     instrument: string;
   }[];
   type: string;
-  soloTags: SoloTags;
 }
 
-const Solos: React.FC<SolosProps> = ({ data, type, soloTags }) => {
+async function getSoloTags() {
+  const res = await fetch(`${process.env.API}/solotags`, {
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) return notFound();
+
+  return res.json();
+}
+
+export default async function Solos({
+  workList,
+  type,
+}: SolosProps): Promise<React.JSX.Element> {
+  const soloTags: SoloTags = await getSoloTags();
+
   function sortIntruments() {
     let instrumentList = [];
     for (let work of soloTags.allSoloTags) {
@@ -36,7 +50,7 @@ const Solos: React.FC<SolosProps> = ({ data, type, soloTags }) => {
             key={instrument}>
             {instrument}
           </h2>
-          {data.map((work: Works) => (
+          {workList.map((work: Work) => (
             <>
               {work.soloTag!.soloTagTitle === instrument ? (
                 <Link key={work.id} href={`/works/${type}/${work.param}`}>
@@ -55,6 +69,4 @@ const Solos: React.FC<SolosProps> = ({ data, type, soloTags }) => {
       ))}
     </>
   );
-};
-
-export default Solos;
+}
