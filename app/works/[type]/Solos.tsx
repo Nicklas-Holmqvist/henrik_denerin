@@ -46,22 +46,26 @@ export default async function Solos({
       {instruments.map((instrument) => (
         <div key={instrument} className="pb-3">
           <h2
-            className="pb-7 underline-offset-4 underline pt-8"
+            className="pb-7 underline-offset-4 underline pt-8 first:pt-0"
             key={instrument}>
             {instrument}
           </h2>
           {workList.map((work: Work) => (
             <>
               {work.soloTag!.soloTagTitle === instrument ? (
-                <Link key={work.id} href={`/works/${type}/${work.param}`}>
-                  <h3 className="py-2.5">
-                    {work.title} [{work.year}]{' '}
-                    <span className="font-normal">
-                      {' '}
-                      &mdash; {work.instrument}
-                    </span>
-                  </h3>
-                </Link>
+                <div key={work.id} className="py-2.5">
+                  <Link
+                    href={`/works/${type}/${work.param}`}
+                    className="py-2.5">
+                    <h3 className="inline hover:bg-blue hover:text-white duration-75">
+                      {work.title} [{work.year}]{' '}
+                      <span className="font-normal">
+                        {' '}
+                        &mdash; {work.instrument}
+                      </span>
+                    </h3>
+                  </Link>
+                </div>
               ) : null}
             </>
           ))}

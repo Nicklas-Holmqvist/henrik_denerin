@@ -21,6 +21,10 @@ body {
   padding-bottom: 4rem;
 }
 
+main {
+  @apply max-w-2xl m-auto pt-24 px-5 lg:max-2xl:px-0;
+}
+
 section {
   padding-top: 4rem;
 }
@@ -59,6 +63,14 @@ a {
   line-height: 2rem;
 }
 
+.dropdown {
+  @apply bg-white;
+}
+
+.dropdown li:hover {
+  @apply hover:bg-blue hover:text-white duration-75;
+}
+
 .border-bottom {
   border-bottom: solid 2px var(--color-darkblue);
   transition: border ease-in-out 0.1s;
@@ -92,6 +104,10 @@ a {
 
   a {
     font-size: 12px;
+  }
+
+  .workList a {
+    font-size: 14px;
   }
 
   section {

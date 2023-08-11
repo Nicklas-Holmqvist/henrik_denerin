@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import React from 'react';
+import { LuMail } from '@metamist/lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import HamburgerButton from './HamburgerButton';
 import MobileMenuItem from './MobileMenuItem';
 import { MenuItem } from '@/types/menuItems';
-import { LuMail } from '@metamist/lucide-react';
 
 interface MobileMenuProps {
   drawer: boolean;
@@ -29,6 +30,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             animate="visible"
             exit="exit">
             <ul className="flex flex-col justify-center items-center h-64">
+              <motion.div
+                variants={motionNavLink}
+                initial="hidden"
+                animate="visible">
+                <Link className="text-2xl" href="/" onClick={setDrawer}>
+                  Home
+                </Link>
+              </motion.div>
               {menuItems.map((menuItem, index) => (
                 <motion.div
                   key={menuItem.text}

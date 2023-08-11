@@ -59,7 +59,7 @@ const NavigationItem: React.FC<navigationItemProps> = ({
             {menuItems.text}
           </p>
           {activeDropdown ? (
-            <ul className="flex-row absolute w-44 pt-2">
+            <ul className="flex-row absolute w-44 pt-2 dropdown">
               {menuItems.categories.length !== 0
                 ? menuItems.categories.map((category, index) => (
                     <Link
@@ -67,18 +67,13 @@ const NavigationItem: React.FC<navigationItemProps> = ({
                       href={`/works/${category.tagtitle}`}
                       onClick={() => setDropdown('')}>
                       {category.tagtitle === 'all' ? (
-                        <li className="pt-1">
+                        <li className="mt-1">
                           <div className="border-t border-b py-1 border-darkblue">
                             {category.tagtitle} works [chronological]
                           </div>
                         </li>
                       ) : (
-                        <Link
-                          className="py-1"
-                          href={`/works/${category.tagtitle}`}
-                          onClick={() => setDropdown('')}>
-                          <li>{category.tagtitle}</li>
-                        </Link>
+                        <li>{category.tagtitle}</li>
                       )}
                     </Link>
                   ))
