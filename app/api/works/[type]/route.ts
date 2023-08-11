@@ -8,10 +8,10 @@ export interface Error {
 
 export async function POST(request: Request) {
   const errorTagID: number = 156210071;
-  const { tagID } = await request.json();
+  const { tagId } = await request.json();
   try {
     const query = `query Works {
-          allWorkinfos(filter: {tags: {allIn: ${tagID[0].id}}}, orderBy: year_DESC, first: 100) {
+          allWorkinfos(filter: {tags: {allIn: ${tagId[0].id}}}, orderBy: year_DESC, first: 100) {
             title
             year
             instrument
@@ -36,6 +36,7 @@ export async function POST(request: Request) {
         year
         instrument
         id
+        param
         tags {
           tagtitle
         }

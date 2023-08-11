@@ -1,8 +1,8 @@
 export interface WorksInterface {
-  allWorkinfos: Works[];
+  allWorkinfos: Work[];
 }
 
-export interface Works {
+export interface Work {
   title: string;
   year: string;
   instrument: string;
@@ -14,4 +14,13 @@ export interface Works {
   soloTag?: {
     soloTagTitle: string;
   };
+}
+
+export interface SoloTags {
+  allSoloTags: SoloTag[];
+}
+
+export interface SoloTag {
+  soloTagTitle: string;
+  id: number;
 }

@@ -39,7 +39,7 @@ const ConcertsPage = async () => {
 
   return (
     <Suspense fallback={<div></div>}>
-      <article className="max-w-2xl m-auto pt-16 px-5 lg:max-2xl:px-0">
+      <main className="max-w-2xl m-auto pt-16 px-5 lg:max-2xl:px-0">
         {years?.map((year, id) => (
           <>
             <h2 className="py-7" key={id}>
@@ -56,7 +56,7 @@ const ConcertsPage = async () => {
             ))}
           </>
         ))}
-      </article>
+      </main>
     </Suspense>
   );
 };
