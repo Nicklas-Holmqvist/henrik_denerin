@@ -5,6 +5,7 @@ import React, { Suspense } from 'react';
 import Solos from './Solos';
 import { Tag } from '@/types/tags';
 import { WorksInterface } from '@/types/works';
+import { Metadata, ResolvingMetadata } from 'next/types';
 
 export const metadata = {
   title: 'Works | Composer Henrik Denerin portfolio',
@@ -29,6 +30,23 @@ async function getWorkList(tagId: Tag[]) {
   if (!res.ok) return notFound();
 
   return res.json();
+}
+
+type MetaProps = {
+  params: { type: string };
+};
+
+export async function generateMetadata({
+  params,
+}: MetaProps): Promise<Metadata> {
+  const formatString = params.type.replace(/%20/g, ' ').replace(/%3E/g, '<');
+
+  const tagTitle = await getTags(formatString);
+  return {
+    title: `${
+      tagTitle[0].tagtitle === 'all' ? 'all works' : tagTitle[0].tagtitle
+    } | Composer Henrik Denerin portfolio`,
+  };
 }
 
 async function getTags(type: string) {

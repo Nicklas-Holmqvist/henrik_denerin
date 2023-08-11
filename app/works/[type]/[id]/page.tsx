@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 
 import WorkInfo from '@/app/works/[type]/[id]/WorkInfo';
+import { Metadata } from 'next/types';
+import { WorkInterface } from '@/types/work';
 
 export const metadata = {
   title: 'Work | Composer Henrik Denerin portfolio',
@@ -8,6 +10,20 @@ export const metadata = {
 
 interface WorkInfoProps {
   params: { id: string };
+}
+
+export async function generateMetadata({
+  params: { id },
+}: WorkInfoProps): Promise<Metadata> {
+  const work: WorkInterface = await getWork(id);
+  return {
+    title: `${work.workinfo.title} | Composer Henrik Denerin portfolio`,
+    description: `${
+      work.workinfo.programnote !== ''
+        ? work.workinfo.programnote.slice(0, 50)
+        : ''
+    }`,
+  };
 }
 
 async function getWork(id: string) {
@@ -22,7 +38,7 @@ async function getWork(id: string) {
 }
 
 const Work = async ({ params: { id } }: WorkInfoProps) => {
-  const work = await getWork(id);
+  const work: WorkInterface = await getWork(id);
   return (
     <main className="px-5 lg:max-2xl:px-0 pt-16">
       <Suspense fallback={<div></div>}>
