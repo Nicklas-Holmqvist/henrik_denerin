@@ -58,10 +58,11 @@ const WorkInfo = ({ data }: { data: WorkInterface }) => {
         <Image
           className="m-auto py-1.5"
           src={data!.workinfo.excerpt?.url}
-          width={400}
+          width={672}
           height={200}
           alt={`${data!.workinfo.excerpt?.title}`}
           priority
+          quality={80}
         />
       ) : null}
     </>
