@@ -23,7 +23,7 @@ const About = async () => {
   const about: AboutInterface = await getAbout();
 
   return (
-    <main className="px-5 lg:max-2xl:px-0 pt-16">
+    <main className="">
       <Suspense fallback={<div></div>}>
         <div className="flex flex-col text-center pb-16">
           <div className="flex flex-row m-auto pb-1">

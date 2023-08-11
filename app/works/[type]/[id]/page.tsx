@@ -36,7 +36,7 @@ async function getWork(id: string) {
 const Work = async ({ params: { id } }: WorkInfoProps) => {
   const work: WorkInterface = await getWork(id);
   return (
-    <main className="px-5 lg:max-2xl:px-0 pt-16">
+    <main className="">
       <Suspense fallback={<div></div>}>
         <WorkInfo data={work} />
       </Suspense>

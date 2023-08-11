@@ -5,7 +5,7 @@ import React, { Suspense } from 'react';
 import Solos from './Solos';
 import { Tag } from '@/types/tags';
 import { WorksInterface } from '@/types/works';
-import { Metadata, ResolvingMetadata } from 'next/types';
+import { Metadata } from 'next/types';
 
 interface WorkCategoryProps {
   params: { type: string };
@@ -67,7 +67,7 @@ const WorkCategoryPage = async ({ params: { type } }: WorkCategoryProps) => {
   const workList: WorksInterface = await getWorkList(tagId);
 
   return (
-    <main className="max-w-2xl m-auto pt-16 px-5 lg:max-2xl:px-0">
+    <main className="">
       <Suspense fallback={<div></div>}>
         {type === 'all' ? (
           <h1 className="pb-6 underline-offset-4 underline pb-1">
@@ -82,13 +82,11 @@ const WorkCategoryPage = async ({ params: { type } }: WorkCategoryProps) => {
           /* @ts-expect-error Server Component */
           <Solos workList={workList!.allWorkinfos} type={formatString} />
         ) : (
-          <>
+          <div className="flex flex-col">
             {workList.allWorkinfos.map((work) => (
-              <>
-                <Link
-                  key={work.id}
-                  href={`/works/${formatString}/${work.param}`}>
-                  <h3 className="py-2.5">
+              <div key={work.id} className="py-2.5">
+                <Link href={`/works/${formatString}/${work.param}`}>
+                  <h3 className="inline hover:bg-blue hover:text-white duration-75">
                     {work.title} [{work.year}]
                     <span className="font-normal">
                       {' '}
@@ -96,9 +94,9 @@ const WorkCategoryPage = async ({ params: { type } }: WorkCategoryProps) => {
                     </span>
                   </h3>
                 </Link>
-              </>
+              </div>
             ))}
-          </>
+          </div>
         )}
       </Suspense>
     </main>
