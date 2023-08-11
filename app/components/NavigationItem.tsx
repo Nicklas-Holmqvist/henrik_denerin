@@ -67,7 +67,7 @@ const NavigationItem: React.FC<navigationItemProps> = ({
                       href={`/works/${category.tagtitle}`}
                       onClick={() => setDropdown('')}>
                       {category.tagtitle === 'all' ? (
-                        <li>
+                        <li className="pt-1">
                           <div className="border-t border-b py-1 border-darkblue">
                             {category.tagtitle} works [chronological]
                           </div>
