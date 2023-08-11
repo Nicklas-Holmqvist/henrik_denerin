@@ -37,9 +37,6 @@ const NavigationItem: React.FC<navigationItemProps> = ({
     <div ref={subRef}>
       {menuItems.text !== 'works' ? (
         <Link
-          // onMouseEnter={() => {
-          //   setDropdown(menuItems.text);
-          // }}
           className={
             includesPathname
               ? 'border-bottom font-medium text-lg pb-0.5'
@@ -65,23 +62,25 @@ const NavigationItem: React.FC<navigationItemProps> = ({
             <ul className="flex-row absolute w-44 pt-2">
               {menuItems.categories.length !== 0
                 ? menuItems.categories.map((category, index) => (
-                    <li key={index} className="font-medium">
+                    <Link
+                      key={index}
+                      href={`/works/${category.tagtitle}`}
+                      onClick={() => setDropdown('')}>
                       {category.tagtitle === 'all' ? (
-                        <div className="border-t border-b mt-1 pb-1 border-darkblue">
-                          <Link
-                            href={`/works/${category.tagtitle}`}
-                            onClick={() => setDropdown('')}>
+                        <li>
+                          <div className="border-t border-b py-1 border-darkblue">
                             {category.tagtitle} works [chronological]
-                          </Link>
-                        </div>
+                          </div>
+                        </li>
                       ) : (
                         <Link
+                          className="py-1"
                           href={`/works/${category.tagtitle}`}
                           onClick={() => setDropdown('')}>
-                          {category.tagtitle}
+                          <li>{category.tagtitle}</li>
                         </Link>
                       )}
-                    </li>
+                    </Link>
                   ))
                 : null}
             </ul>
