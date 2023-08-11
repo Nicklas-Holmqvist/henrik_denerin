@@ -7,10 +7,6 @@ import { Tag } from '@/types/tags';
 import { WorksInterface } from '@/types/works';
 import { Metadata, ResolvingMetadata } from 'next/types';
 
-export const metadata = {
-  title: 'Works | Composer Henrik Denerin portfolio',
-};
-
 interface WorkCategoryProps {
   params: { type: string };
 }

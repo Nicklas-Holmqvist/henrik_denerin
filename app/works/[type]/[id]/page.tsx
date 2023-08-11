@@ -4,10 +4,6 @@ import WorkInfo from '@/app/works/[type]/[id]/WorkInfo';
 import { Metadata } from 'next/types';
 import { WorkInterface } from '@/types/work';
 
-export const metadata = {
-  title: 'Work | Composer Henrik Denerin portfolio',
-};
-
 interface WorkInfoProps {
   params: { id: string };
 }
