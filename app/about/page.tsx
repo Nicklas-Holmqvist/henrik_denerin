@@ -33,6 +33,8 @@ const About = async () => {
                 width={336}
                 height={300}
                 alt="Henrik Denerin 1"
+                quality={80}
+                priority
               />
             </a>
             <a href={`${about.about.image2.url}`}>
@@ -41,6 +43,8 @@ const About = async () => {
                 width={336}
                 height={300}
                 alt="Henrik Denerin 2"
+                quality={80}
+                priority
               />
             </a>
           </div>
