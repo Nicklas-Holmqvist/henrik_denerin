@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export interface Error {
   msg: string;
-  status: boolean;
+  status: number;
 }
 
 export async function POST(request: Request) {
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
   }`;
   const errorMsg: Error = {
     msg: 'No data to be found',
-    status: false,
+    status: 404,
   };
 
   try {

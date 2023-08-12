@@ -11,6 +11,25 @@ interface WorkCategoryProps {
   params: { type: string };
 }
 
+export async function generateMetadata({
+  params,
+}: WorkCategoryProps): Promise<Metadata> {
+  const formatString = params.type.replace(/%20/g, ' ').replace(/%3E/g, '<');
+
+  const tagTitle = await getTags(formatString);
+
+  if (tagTitle.length !== 0) {
+    return {
+      title: `${
+        tagTitle[0].tagtitle === 'all' ? 'all works' : tagTitle[0].tagtitle
+      } | Composer Henrik Denerin portfolio`,
+    };
+  }
+  return {
+    title: 'No work to be find! | Composer Henrik Denerin',
+  };
+}
+
 async function getWorkList(tagId: Tag[]) {
   const options = {
     method: 'POST',
@@ -23,26 +42,10 @@ async function getWorkList(tagId: Tag[]) {
     options
   );
 
-  if (!res.ok) return notFound();
+  const works = await res.json();
+  if (works.allWorkinfos === null || tagId.length === 0) return notFound();
 
-  return res.json();
-}
-
-type MetaProps = {
-  params: { type: string };
-};
-
-export async function generateMetadata({
-  params,
-}: MetaProps): Promise<Metadata> {
-  const formatString = params.type.replace(/%20/g, ' ').replace(/%3E/g, '<');
-
-  const tagTitle = await getTags(formatString);
-  return {
-    title: `${
-      tagTitle[0].tagtitle === 'all' ? 'all works' : tagTitle[0].tagtitle
-    } | Composer Henrik Denerin portfolio`,
-  };
+  return works;
 }
 
 async function getTags(type: string) {
@@ -50,17 +53,13 @@ async function getTags(type: string) {
     next: { revalidate: 3600 },
   });
 
-  if (!res.ok) return notFound();
+  const tags = await res.json();
+  const tagId: Tag[] = tags.allTags.filter((tag: Tag) => tag.tagtitle === type);
 
-  const response = await res.json();
-
-  const tagId: Tag[] = response.allTags.filter(
-    (tag: Tag) => tag.tagtitle === type
-  );
   return tagId;
 }
 
-const WorkCategoryPage = async ({ params: { type } }: WorkCategoryProps) => {
+const WorkList = async ({ params: { type } }: WorkCategoryProps) => {
   const formatString = type.replace(/%20/g, ' ').replace(/%3E/g, '<');
 
   const tagId = await getTags(formatString);
@@ -103,4 +102,4 @@ const WorkCategoryPage = async ({ params: { type } }: WorkCategoryProps) => {
   );
 };
 
-export default WorkCategoryPage;
+export default WorkList;
