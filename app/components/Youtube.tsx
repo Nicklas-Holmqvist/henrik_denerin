@@ -8,7 +8,7 @@ interface YoutubeProps {
 }
 
 const Youtube: React.FC<YoutubeProps> = ({ url }) => {
-  return <ReactPlayer url={`${url}`} />;
+  return <ReactPlayer controls url={`${url}`} />;
 };
 
 export default Youtube;

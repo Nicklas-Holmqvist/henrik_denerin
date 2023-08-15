@@ -1,7 +1,10 @@
 import { Archivo, Noto_Sans } from 'next/font/google';
+import { cookies } from 'next/headers';
 
-import DesktopHeader from '@/app/components/Header';
 import './globals.css';
+import Footer from './components/Footer';
+import DesktopHeader from '@/app/components/Header';
+import CookiesBanner from './components/CookiesBanner';
 
 const archivo = Archivo({ subsets: ['latin'], variable: '--font-archivo' });
 const notoSans = Noto_Sans({
@@ -20,11 +23,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookie = cookies();
+
   return (
     <html lang="en">
       <body className={`${archivo.variable} ${notoSans.variable}`}>
         <DesktopHeader />
         {children}
+        <CookiesBanner />
+        <Footer />
       </body>
     </html>
   );

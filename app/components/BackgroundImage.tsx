@@ -30,7 +30,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({}) => {
   }, [image, images.length]);
 
   return (
-    <div className="animate-fadeInBg">
+    <div className="animate-fadeInBg background">
       <div className="static">
         <div className="flex justify-center m-auto ">
           <Image
