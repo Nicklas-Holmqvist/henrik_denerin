@@ -9,7 +9,7 @@ interface ConcertProps {
 }
 
 export const metadata = {
-  title: 'Concerts | Composer Henrik Denerin',
+  title: 'Concerts | HENRIK DENERIN – composer',
 };
 
 const Concert: React.FC<ConcertProps> = ({ concert }) => {

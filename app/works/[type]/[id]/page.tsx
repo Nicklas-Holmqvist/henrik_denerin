@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   if (work.workinfo !== null) {
     return {
-      title: `${work.workinfo.title} | Composer Henrik Denerin portfolio`,
+      title: `${work.workinfo.title} | HENRIK DENERIN – composer`,
       description: `${
         work.workinfo.programnote !== ''
           ? work.workinfo.programnote.slice(0, 50)
@@ -25,7 +25,7 @@ export async function generateMetadata({
     };
   }
   return {
-    title: 'No work to be find! | Composer Henrik Denerin',
+    title: 'No work to be find! | HENRIK DENERIN – composer',
   };
 }
 
