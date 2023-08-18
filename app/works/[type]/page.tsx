@@ -22,7 +22,7 @@ export async function generateMetadata({
     return {
       title: `${
         tagTitle[0].tagtitle === 'all' ? 'all works' : tagTitle[0].tagtitle
-      } | Composer Henrik Denerin portfolio`,
+      } | HENRIK DENERIN – composer`,
     };
   }
   return {

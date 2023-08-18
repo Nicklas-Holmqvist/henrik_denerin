@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { AboutInterface } from '@/types/about';
 
 export const metadata = {
-  title: 'About | Composer Henrik Denerin',
+  title: 'About | HENRIK DENERIN – composer',
 };
 
 async function getAbout() {

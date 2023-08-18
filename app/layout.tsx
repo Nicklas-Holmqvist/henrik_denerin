@@ -2,7 +2,6 @@ import { Archivo, Noto_Sans } from 'next/font/google';
 import { cookies } from 'next/headers';
 
 import './globals.css';
-import Footer from './components/Footer';
 import DesktopHeader from '@/app/components/Header';
 import CookiesBanner from './components/CookiesBanner';
 
@@ -14,7 +13,7 @@ const notoSans = Noto_Sans({
 });
 
 export const metadata = {
-  title: 'Composer Henrik Denerin portfolio',
+  title: 'HENRIK DENERIN – composer',
   description: 'Henrik Denerin is an composer from Sweden.',
 };
 
@@ -31,7 +30,6 @@ export default function RootLayout({
         <DesktopHeader />
         {children}
         <CookiesBanner />
-        <Footer />
       </body>
     </html>
   );
