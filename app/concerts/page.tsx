@@ -5,7 +5,7 @@ import Concert from './Concert';
 import { ConcertsInterface } from '@/types/concerts';
 
 export const metadata = {
-  title: 'Concerts | Composer Henrik Denerin portfolio',
+  title: 'Concerts | HENRIK DENERIN – composer',
 };
 
 async function getConcerts() {
