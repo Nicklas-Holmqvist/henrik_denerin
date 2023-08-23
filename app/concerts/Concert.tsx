@@ -8,10 +8,6 @@ interface ConcertProps {
   concert: ConcertsInterface;
 }
 
-export const metadata = {
-  title: 'Concerts | HENRIK DENERIN – composer',
-};
-
 const Concert: React.FC<ConcertProps> = ({ concert }) => {
   const day = new Date(concert.date).getDate();
   const month = new Date(concert.date).getMonth();
