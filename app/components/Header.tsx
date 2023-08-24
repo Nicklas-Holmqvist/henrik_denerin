@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = () => {
     <>
       {loading ? null : (
         <nav
-          className={`flex flex-row justify-center max-w-6xl m-auto py-4 2xl:justify-between lg:justify-between lg:px-2 bg-white-200 ${
+          className={`flex flex-row justify-center max-w-6xl m-auto py-4 2xl:justify-between lg:justify-between lg:px-2 ${
             mobileView && 'fixed left-0 right-0 top-0 h-16 z-20'
           }`}>
           <Logo src={data!.logo.image.url} alt={data!.logo.image.alt} />

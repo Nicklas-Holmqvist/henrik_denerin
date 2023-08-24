@@ -7,6 +7,7 @@
   --color-blue: #072c89;
   --color-white: #f4f4f9;
   --color-bg-darkblue: #04194f0e;
+  --paper-background: url('/images/background.jpg');
 }
 
 * {
@@ -17,7 +18,7 @@
 
 body {
   color: var(--color-darkblue);
-  background: var(--color-white);
+  background-image: var(--paper-background);
 }
 
 main {
@@ -62,10 +63,6 @@ a {
   line-height: 2rem;
 }
 
-.dropdown {
-  @apply bg-white;
-}
-
 .dropdown li:hover {
   @apply hover:bg-blue hover:text-white duration-75;
 }
@@ -97,6 +94,10 @@ a {
 }
 
 @media (max-width: 800px) {
+  nav {
+    background-image: var(--paper-background);
+  }
+
   h1 {
     font-size: 24px;
   }
