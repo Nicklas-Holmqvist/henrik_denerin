@@ -21,8 +21,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   return (
     <>
       <HamburgerButton active={drawer} onClick={setDrawer} />
-      {drawer ? (
-        <AnimatePresence>
+      <AnimatePresence>
+        {drawer ? (
           <motion.aside
             className="fixed top-0 bottom-0 flex flex-col justify-center bg-white z-10"
             variants={motionMobilMenu}
@@ -33,7 +33,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               <motion.div
                 variants={motionNavLink}
                 initial="hidden"
-                animate="visible">
+                animate="visible"
+                exit="exit">
                 <Link className="text-2xl" href="/" onClick={setDrawer}>
                   Home
                 </Link>
@@ -44,7 +45,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                   variants={motionNavLink}
                   custom={index}
                   initial="hidden"
-                  animate="visible">
+                  animate="visible"
+                  exit="exit">
                   <MobileMenuItem setDrawer={setDrawer} menuItem={menuItem} />
                 </motion.div>
               ))}
@@ -54,8 +56,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
-                  transition: { duration: 0.5, delay: 0.5 },
+                  transition: { duration: 0.5, delay: 0.7 },
                   y: 6,
+                }}
+                exit={{
+                  opacity: 0,
                 }}
                 whileHover={{
                   scale: 1.05,
@@ -65,8 +70,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               </motion.a>
             </ul>
           </motion.aside>
-        </AnimatePresence>
-      ) : null}
+        ) : null}
+      </AnimatePresence>
     </>
   );
 };
@@ -79,21 +84,33 @@ const motionNavLink = {
     opacity: 1,
     x: 0,
     transition: {
-      delay: index * 0.1,
+      delay: index * 0.2,
       duration: 0.3,
     },
   }),
+  exit: {
+    opacity: 0,
+  },
 };
 
 const motionMobilMenu = {
-  hidden: { margin: '-100%', width: '100vw' },
+  hidden: { opacity: 0 },
   visible: {
-    margin: 0,
-    width: '100vw',
+    left: 0,
+    right: 0,
+    opacity: 1,
     transition: {
-      delay: 0.2,
+      delay: 0.1,
       stiffness: 100,
     },
   },
-  exit: { margin: '-100%', width: '0' },
+  exit: {
+    opacity: 0,
+    left: '-300',
+    right: 500,
+    transition: {
+      delay: 0.1,
+      stiffness: 100,
+    },
+  },
 };
