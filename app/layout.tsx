@@ -1,5 +1,4 @@
 import { Archivo, Noto_Sans } from 'next/font/google';
-import { cookies } from 'next/headers';
 
 import './globals.css';
 import DesktopHeader from '@/app/components/Header';
@@ -22,8 +21,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookie = cookies();
-
   return (
     <html lang="en">
       <body className={`${archivo.variable} ${notoSans.variable}`}>
