@@ -3,9 +3,9 @@ import React from 'react';
 import { LuMail } from '@metamist/lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import HamburgerButton from './HamburgerButton';
-import MobileMenuItem from './MobileMenuItem';
 import { MenuItem } from '@/types/menuItems';
+import MobileMenuItem from './MobileMenuItem';
+import HamburgerButton from './HamburgerButton';
 
 interface MobileMenuProps {
   drawer: boolean;
@@ -31,7 +31,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             exit="exit">
             <ul className="flex flex-col justify-center items-center h-64">
               <motion.div
-                variants={motionNavLink}
+                variants={motionLink}
                 initial="hidden"
                 animate="visible"
                 exit="exit">
@@ -42,7 +42,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               {menuItems.map((menuItem, index) => (
                 <motion.div
                   key={menuItem.text}
-                  variants={motionNavLink}
+                  variants={motionLink}
                   custom={index}
                   initial="hidden"
                   animate="visible"
@@ -78,7 +78,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 
 export default MobileMenu;
 
-const motionNavLink = {
+const motionLink = {
   hidden: { opacity: 0, x: -30 },
   visible: (index: number) => ({
     opacity: 1,

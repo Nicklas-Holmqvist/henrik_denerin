@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { LuMail } from '@metamist/lucide-react';
 import React, { useState } from 'react';
 
-import NavigationItem from './NavigationItem';
 import { MenuItem } from '@/types/menuItems';
+import NavigationItem from './NavigationItem';
 
 interface NavigationProps {
   menuItems: MenuItem[];
@@ -51,14 +51,17 @@ const Navigation: React.FC<NavigationProps> = ({ menuItems }) => {
 
 export default Navigation;
 
-const motionNavLink = {
+export const motionNavLink = {
   hidden: { opacity: 0, y: -10 },
   visible: (index: number) => ({
     opacity: 1,
     y: 0,
     transition: {
       delay: index * 0.1,
-      duration: 0.3,
+      duration: 0.2,
+    },
+    motionLink: {
+      opacity: 0,
     },
   }),
 };
