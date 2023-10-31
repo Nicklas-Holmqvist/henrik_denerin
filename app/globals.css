@@ -68,17 +68,30 @@ a {
 }
 
 .border-bottom {
-  border-bottom: solid 2px var(--color-darkblue);
-  transition: border ease-in-out 0.1s;
+  border-bottom: solid 2px var(--color-blue);
 }
 
-.border-hover:hover {
-  border-bottom: solid 2px var(--color-darkblue);
-  transition: border ease-in-out 0.1s;
+.navlink-bg:hover {
+  color: var(--color-white);
+}
+.navlink-bg::after {
+  z-index: -10;
+  content: '';
+  position: absolute;
+  background-color: var(--color-blue);
+  height: 100%;
+  bottom: 6px;
+  left: 0;
+  width: 0;
+  transition: 0.2s;
+}
+.navlink-bg:hover::after {
+  color: var(--color-white);
+  width: 100%;
 }
 
 .background-text {
-  background-color: var(--color-bg-darkblue);
+  background-color: var(--color-bg-blue);
 }
 
 .background {

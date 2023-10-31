@@ -21,10 +21,7 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
           <ul className="text-center pb-2">
             {menuItem.categories.length !== 0
               ? menuItem.categories.map((category, index) => (
-                  <motion.li
-                    key={index}
-                    variants={motionNavLink}
-                    custom={index}>
+                  <motion.li key={index} variants={motionLink} custom={index}>
                     {category.tagtitle === 'all' ? (
                       <div className="border-t border-b mt-1 pb-1 border-darkblue">
                         <Link
@@ -64,7 +61,7 @@ const MobileMenuItem: React.FC<MobileMenuItemProps> = ({
 
 export default MobileMenuItem;
 
-const motionNavLink = {
+const motionLink = {
   hidden: { opacity: 0, x: 30 },
   visible: (index: number) => ({
     opacity: 1,
