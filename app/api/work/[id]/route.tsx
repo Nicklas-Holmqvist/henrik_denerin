@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       premiere
       programnote
       media
+      spotify
       excerpt {
         title
         url

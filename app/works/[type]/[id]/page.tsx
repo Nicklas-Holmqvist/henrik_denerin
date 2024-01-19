@@ -34,7 +34,6 @@ async function getWork(id: string) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
-    next: { revalidate: 60 },
   };
   const res = await fetch(`${process.env.API}/work/song?id=${id}`, options);
   const work = await res.json();
@@ -45,7 +44,6 @@ async function getWork(id: string) {
 
 const Work = async ({ params: { id } }: WorkInfoProps) => {
   const work: WorkInterface = await getWork(id);
-
   return (
     <main className="">
       <Suspense fallback={<div></div>}>
