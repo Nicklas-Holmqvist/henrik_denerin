@@ -5,6 +5,7 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import MediaPlayer from '../../../components/MediaPlayer';
 import WorkInfoText from './WorkInfoText';
 import { WorkInterface } from '@/types/work';
+import SpotifyPlayer from '@/app/components/SpotifyPlayer';
 
 const WorkInfo = ({ data }: { data: WorkInterface }) => {
   return (
@@ -49,6 +50,9 @@ const WorkInfo = ({ data }: { data: WorkInterface }) => {
         </p>
       ) : null}
       {data!.workinfo.media ? <MediaPlayer url={data!.workinfo.media} /> : null}
+      {data!.workinfo.spotify ? (
+        <SpotifyPlayer url={data!.workinfo.spotify} />
+      ) : null}
       {data!.workinfo.programnote ? (
         <ReactMarkdown className="max-w-2xl m-auto py-4 pb-16 markdown">
           {data!.workinfo.programnote}

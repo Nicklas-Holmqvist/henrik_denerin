@@ -12,6 +12,7 @@ export interface WorkInterface {
       value: any;
     };
     media?: string;
+    spotify: string | null;
     excerpt?: {
       title: string;
       url: string;
