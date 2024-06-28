@@ -31,7 +31,7 @@ const Navigation: React.FC<NavigationProps> = ({ menuItems }) => {
         </motion.li>
       ))}
       <motion.a
-        href="mailto:info@denerin.org"
+        href="mailto:denerin@gmail.com"
         className="pl-2"
         initial={{ opacity: 0 }}
         animate={{

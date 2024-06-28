@@ -51,7 +51,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 </motion.div>
               ))}
               <motion.a
-                href="mailto:info@denerin.org"
+                href="mailto:denerin@gmail.com"
                 className="pl-2"
                 initial={{ opacity: 0 }}
                 animate={{
