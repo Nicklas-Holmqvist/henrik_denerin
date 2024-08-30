@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-import { LuMail } from '@metamist/lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { MenuItem } from '@/types/menuItems';
@@ -51,22 +50,18 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 </motion.div>
               ))}
               <motion.a
+                onClick={setDrawer}
                 href="mailto:denerin@gmail.com"
-                className="pl-2"
+                className="text-2xl"
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
                   transition: { duration: 0.5, delay: 0.7 },
-                  y: 6,
                 }}
                 exit={{
                   opacity: 0,
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.2 },
                 }}>
-                <LuMail size={18} />
+                contact
               </motion.a>
             </ul>
           </motion.aside>

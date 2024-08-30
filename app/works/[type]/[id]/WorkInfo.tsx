@@ -45,7 +45,7 @@ const WorkInfo = ({ data }: { data: WorkInterface }) => {
             href={`${data!.workinfo.babelscore}`}
             rel="noopener noreferrer"
             target="_blank">
-            Babelscore
+            Babelscores
           </Link>
         </p>
       ) : null}
