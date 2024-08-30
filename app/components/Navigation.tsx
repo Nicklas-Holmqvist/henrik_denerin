@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { LuMail } from '@metamist/lucide-react';
 import React, { useState } from 'react';
 
 import { MenuItem } from '@/types/menuItems';
@@ -32,18 +31,13 @@ const Navigation: React.FC<NavigationProps> = ({ menuItems }) => {
       ))}
       <motion.a
         href="mailto:denerin@gmail.com"
-        className="pl-2"
+        className="relative px-2 font-medium text-lg pb-0.5 navlink-bg"
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
-          transition: { duration: 0.5, delay: 0.5 },
-          y: 6,
-        }}
-        whileHover={{
-          scale: 1.05,
-          transition: { duration: 0.2 },
+          transition: { duration: 0.2, delay: 0.5 },
         }}>
-        <LuMail size={18} />
+        contact
       </motion.a>
     </ul>
   );
