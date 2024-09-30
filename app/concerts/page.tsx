@@ -4,14 +4,14 @@ import { notFound } from 'next/navigation';
 import Concert from './Concert';
 import { ConcertsInterface } from '@/types/concerts';
 
+export const revalidate = 0;
+
 export const metadata = {
   title: 'Concerts | HENRIK DENERIN – composer',
 };
 
 async function getConcerts() {
-  const res = await fetch(`${process.env.API}/concerts`, {
-    next: { revalidate: 3600 },
-  });
+  const res = await fetch(`${process.env.API}/concerts`);
 
   if (!res.ok) return notFound();
 
