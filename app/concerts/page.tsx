@@ -20,7 +20,6 @@ const ConcertsPage = async () => {
   const concerts: ConcertsInterface[] = await getConcerts();
 
   const years = sortYear(concerts);
-  console.log('LOADING');
 
   function sortYear(data: any) {
     let years = [];
