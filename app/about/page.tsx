@@ -10,7 +10,9 @@ export const metadata = {
 };
 
 async function getAbout() {
-  const res = await fetch(`${process.env.API}/about`);
+  const res = await fetch(`${process.env.API}/about`, {
+    next: { revalidate: 5 },
+  });
 
   if (!res.ok) return notFound();
 

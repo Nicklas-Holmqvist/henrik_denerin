@@ -9,11 +9,9 @@ export const metadata = {
 };
 
 async function getConcerts() {
-  const options = {
-    method: 'GET',
+  const res = await fetch(`${process.env.API}/concerts`, {
     next: { revalidate: 5 },
-  };
-  const res = await fetch(`${process.env.API}/concerts`, options);
+  });
 
   if (!res.ok) return notFound();
 
