@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 async function getAbout() {
-  const res = await fetch(`${process.env.API}/about`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.API}/about`);
 
   if (!res.ok) return notFound();
 
