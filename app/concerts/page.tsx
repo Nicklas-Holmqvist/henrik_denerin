@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 async function getConcerts() {
-  const res = await fetch(`${process.env.LOCAL}/concerts`, {
+  const res = await fetch(`${process.env.API}/concerts`, {
     next: { revalidate: 5 },
   });
 
