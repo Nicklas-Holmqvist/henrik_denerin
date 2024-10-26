@@ -3,16 +3,58 @@ import { notFound } from 'next/navigation';
 
 import Concert from './Concert';
 import { ConcertsInterface } from '@/types/concerts';
+import { datoRequest } from '@/lib/datocms';
 
 export const metadata = {
   title: 'Concerts | HENRIK DENERIN – composer',
 };
 
+const query = `query Concerts {
+  allConcerts(orderBy: date_DESC, first: 100) {
+    date
+    place
+    piece
+    performer
+    additionalInfo
+    firstPerformance
+    time
+    link
+    linkTitle
+  }
+  _allConcertsMeta {
+    count
+  }
+}`;
+
+const secondQuery = `query Concerts {
+  allConcerts(orderBy: date_DESC, first:100, skip: 100) {
+    date
+    place
+    piece
+    performer
+    additionalInfo
+    firstPerformance
+    time
+    link
+    linkTitle
+  }
+}`;
+
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 async function getConcerts() {
-  const res = await fetch(`${process.env.API}/concerts`, { cache: 'no-store' });
+  let response: any = [];
+  const res: any = await datoRequest({
+    query: query,
+  });
+  response.push({ allConcerts: res.allConcerts });
+  if (res._allConcertsMeta.count >= 100) {
+    const secondRes: any = await datoRequest({
+      query: secondQuery,
+    });
+    return response[0].allConcerts.concat(secondRes.allConcerts);
+  }
 
   if (!res.ok) return notFound();
 
