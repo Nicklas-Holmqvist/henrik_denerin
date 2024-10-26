@@ -4,12 +4,16 @@ import { notFound } from 'next/navigation';
 import Concert from './Concert';
 import { ConcertsInterface } from '@/types/concerts';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Concerts | HENRIK DENERIN – composer',
 };
 
 async function getConcerts() {
-  const res = await fetch(`${process.env.API}/concerts`);
+  const res = await fetch(`${process.env.API}/concerts`, {
+    next: { revalidate: 5 },
+  });
 
   if (!res.ok) return notFound();
 
