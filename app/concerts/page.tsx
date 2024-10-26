@@ -8,10 +8,11 @@ export const metadata = {
   title: 'Concerts | HENRIK DENERIN – composer',
 };
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function getConcerts() {
-  const res = await fetch(`${process.env.API}/concerts`, {
-    next: { revalidate: 5 },
-  });
+  const res = await fetch(`${process.env.API}/concerts`);
 
   if (!res.ok) return notFound();
 
