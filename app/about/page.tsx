@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { datoRequest } from '@/lib/datocms';
 import Image from 'next/image';
 
 import { AboutInterface } from '@/types/about';
@@ -9,12 +10,32 @@ export const metadata = {
   title: 'About | HENRIK DENERIN – composer',
 };
 
+const query = `query About {
+  about {
+      image {
+        url
+        alt
+      }
+      image2 {
+        url
+        alt
+      }
+      text(markdown: false)
+      awardstext
+    }
+}`;
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function getAbout() {
-  const res = await fetch(`${process.env.API}/about`);
+  const res: any = await datoRequest({
+    query: query,
+  });
 
-  if (!res.ok) return notFound();
+  if (!res) return notFound();
 
-  return res.json();
+  return res;
 }
 
 const About = async () => {
