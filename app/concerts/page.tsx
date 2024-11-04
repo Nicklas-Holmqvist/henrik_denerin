@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import { notFound } from 'next/navigation';
+import { datoRequest } from '@/lib/datocms';
 
 import Concert from './Concert';
 import { ConcertsInterface } from '@/types/concerts';
-import { datoRequest } from '@/lib/datocms';
 
 export const metadata = {
   title: 'Concerts | HENRIK DENERIN – composer',
