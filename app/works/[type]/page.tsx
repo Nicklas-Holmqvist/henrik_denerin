@@ -6,6 +6,9 @@ import Solos from './Solos';
 import { Tag } from '@/types/tags';
 import { WorksInterface } from '@/types/works';
 import { Metadata } from 'next/types';
+import { datoRequest } from '@/lib/datocms';
+
+export const revalidate = 0;
 
 interface WorkCategoryProps {
   params: { type: string };
@@ -31,29 +34,42 @@ export async function generateMetadata({
 }
 
 async function getWorkList(tagId: Tag[]) {
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tagId }),
-    next: { revalidate: 3600 },
-  };
-  const res = await fetch(
-    `${process.env.API}/works/category?type=${tagId}`,
-    options
-  );
+  const query = `query Works {
+            allWorkinfos(filter: {tags: {allIn: ${tagId[0].id}}}, orderBy: year_DESC, first: 100) {
+              title
+              year
+              instrument
+              id
+              param
+              tags {
+                tagtitle
+              }
+              soloTag {
+                soloTagTitle
+              }
+            }
+          }`;
 
-  const works = await res.json();
-  if (works.allWorkinfos === null || tagId.length === 0) return notFound();
+  const response: any = datoRequest({
+    query: query,
+  });
 
-  return works;
+  if (response.allWorkinfos === null || tagId.length === 0) return notFound();
+  return response;
 }
 
 async function getTags(type: string) {
-  const res = await fetch(`${process.env.API}/tags`, {
-    next: { revalidate: 3600 },
+  const tagQuery = `query Tags {
+    allTags {
+      id
+      tagtitle
+    }
+  }`;
+  const response = await datoRequest({
+    query: tagQuery,
   });
 
-  const tags = await res.json();
+  const tags: any = await response;
   const tagId: Tag[] = tags.allTags.filter((tag: Tag) => tag.tagtitle === type);
 
   return tagId;
