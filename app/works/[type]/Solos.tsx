@@ -3,6 +3,9 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 
 import { SoloTags, Work } from '@/types/works';
+import { datoRequest } from '@/lib/datocms';
+
+export const revalidate = 0;
 
 interface SolosProps {
   workList: {
@@ -16,20 +19,26 @@ interface SolosProps {
 }
 
 async function getSoloTags() {
-  const res = await fetch(`${process.env.API}/solotags`, {
-    next: { revalidate: 3600 },
+  const query = `query SoloTags {
+    allSoloTags(orderBy:sort_ASC) {
+      soloTagTitle
+      id
+    }
+    }`;
+  const response = await datoRequest({
+    query: query,
   });
 
-  if (!res.ok) return notFound();
+  if (!response) return notFound();
 
-  return res.json();
+  return response;
 }
 
 export default async function Solos({
   workList,
   type,
 }: SolosProps): Promise<React.JSX.Element> {
-  const soloTags: SoloTags = await getSoloTags();
+  const soloTags: any = await getSoloTags();
 
   function sortIntruments() {
     let instrumentList = [];

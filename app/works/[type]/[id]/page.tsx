@@ -1,25 +1,28 @@
 import React, { Suspense } from 'react';
-
-import WorkInfo from '@/app/works/[type]/[id]/WorkInfo';
 import { Metadata } from 'next/types';
+
 import { WorkInterface } from '@/types/work';
+import { datoRequest } from '@/lib/datocms';
 import { notFound } from 'next/navigation';
+import WorkInfo from '@/app/works/[type]/[id]/WorkInfo';
 
 interface WorkInfoProps {
   params: { id: string };
 }
 
+export const revalidate = 0;
+
 export async function generateMetadata({
   params: { id },
 }: WorkInfoProps): Promise<Metadata> {
-  const work: WorkInterface = await getWork(id);
+  const response: WorkInterface = await getWork(id);
 
-  if (work.workinfo !== null) {
+  if (response.workinfo !== null) {
     return {
-      title: `${work.workinfo.title} | HENRIK DENERIN – composer`,
+      title: `${response.workinfo.title} | HENRIK DENERIN – composer`,
       description: `${
-        work.workinfo.programnote !== ''
-          ? work.workinfo.programnote.slice(0, 50)
+        response.workinfo.programnote !== ''
+          ? response.workinfo.programnote.slice(0, 50)
           : ''
       }`,
     };
@@ -30,17 +33,37 @@ export async function generateMetadata({
 }
 
 async function getWork(id: string) {
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }),
-    next: { revalidate: 3600 },
-  };
-  const res = await fetch(`${process.env.API}/work/song?id=${id}`, options);
-  const work = await res.json();
+  const query = `query work {
+    workinfo(filter: {param: {eq:"${id}"}}) {
+      title
+      year
+      instrument
+      duration
+      dedication
+      commision
+      premiere
+      programnote
+      media
+      spotify
+      excerpt {
+        title
+        url
+      }
+      babelscore
+      tags {
+        tagtitle
+      }
+      id
+      param
+    }
+  }`;
 
-  if (work.workinfo === null) return notFound();
-  return work;
+  const response: any = datoRequest({
+    query: query,
+  });
+
+  if (response.workinfo === null) return notFound();
+  return response;
 }
 
 const Work = async ({ params: { id } }: WorkInfoProps) => {
